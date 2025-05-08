@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #ffffff;
@@ -10,6 +10,105 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+  --mercury-green: 0, 77, 64;
+  --mercury-light-green: 76, 175, 80;
+  --mercury-accent: 255, 235, 59;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 15s ease infinite;
+}
+
+@keyframes gradient-x {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(90deg, #4caf50, #00e676);
+}
+
+.bg-mercury {
+  background-color: rgb(var(--mercury-green));
+}
+
+.bg-mercury-gradient {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 77, 64, 0.9),
+    rgba(0, 30, 30, 0.95)
+  );
+}
+
+.text-mercury {
+  color: rgb(var(--mercury-light-green));
+}
+
+.border-mercury {
+  border-color: rgb(var(--mercury-light-green));
+}
+
+.mercury-shadow {
+  box-shadow: 0 4px 14px 0 rgba(76, 175, 80, 0.2);
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.grid-pattern {
+  background-image: radial-gradient(
+    rgba(76, 175, 80, 0.1) 1px,
+    transparent 1px
+  );
+  background-size: 30px 30px;
 }
 
 @media (prefers-color-scheme: dark) {
