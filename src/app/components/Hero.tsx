@@ -18,7 +18,7 @@ const Hero = () => {
       ></div>
 
       {/* Green Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-950/50 to-black/60"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-950/50 to-black/50"></div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
