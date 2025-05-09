@@ -1,9 +1,6 @@
 'use client';
-
-import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import Image from 'next/image';
 
 const Hero = () => {
   return (
@@ -13,6 +10,7 @@ const Hero = () => {
         className="absolute inset-0 w-full h-full transition-transform duration-200 ease-out"
         style={{
           backgroundImage: 'url("/grid-pattern.svg")',
+          backgroundSize: 720,
           backgroundAttachment: 'fixed',
           backgroundRepeat: 'repeat',
           opacity: 0.8,
@@ -20,7 +18,7 @@ const Hero = () => {
       ></div>
 
       {/* Green Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-950/40 to-black/80"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-950/50 to-black/60"></div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
