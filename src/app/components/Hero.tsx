@@ -3,56 +3,24 @@
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 
 const Hero = () => {
-  const backgroundRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!backgroundRef.current) return;
-
-      const x = e.clientX / window.innerWidth;
-      const y = e.clientY / window.innerHeight;
-
-      backgroundRef.current.style.transform = `translate(${x * -20}px, ${
-        y * -20
-      }px)`;
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
-      {/* Animated Background */}
+    <section className="relative min-h-screen w-full flex items-center overflow-hidden pt-20">
+      {/* Animated Background with Grid Pattern */}
       <div
-        ref={backgroundRef}
-        className="absolute inset-0 bg-[url('/images/grid.png')] opacity-20 transition-transform duration-200 ease-out"
+        className="absolute inset-0 w-full h-full transition-transform duration-200 ease-out"
+        style={{
+          backgroundImage: 'url("/grid-pattern.svg")',
+          backgroundAttachment: 'fixed',
+          backgroundRepeat: 'repeat',
+          opacity: 0.8,
+        }}
       ></div>
 
       {/* Green Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-950/30 to-black/80"></div>
-
-      {/* Animated Particles */}
-      <div className="absolute inset-0">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full bg-emerald-500/20"
-            style={{
-              width: `${Math.random() * 10 + 5}px`,
-              height: `${Math.random() * 10 + 5}px`,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animation: `float ${
-                Math.random() * 10 + 10
-              }s ease-in-out infinite`,
-              animationDelay: `${Math.random() * 5}s`,
-            }}
-          ></div>
-        ))}
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-950/40 to-black/80"></div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
