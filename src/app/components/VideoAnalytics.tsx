@@ -11,7 +11,7 @@ const VideoAnalytics = () => {
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
-    <section className="py-20 bg-black relative overflow-hidden" ref={ref}>
+    <section className="py-12 bg-black relative overflow-hidden" ref={ref}>
       {/* Background Pattern */}
       <div className="absolute inset-0 grid-pattern opacity-20"></div>
 

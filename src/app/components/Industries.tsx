@@ -18,7 +18,7 @@ const Industries = () => {
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
-    <section className="py-20 bg-black relative" ref={ref}>
+    <section className="py-12 bg-black relative" ref={ref}>
       {/* Background Pattern */}
       <div className="absolute inset-0 grid-pattern opacity-10"></div>
 
@@ -52,7 +52,7 @@ const Industries = () => {
               'Real-time threat detection',
               'Data-driven security insights',
             ]}
-            delay={0}
+            delay={0.2}
             isInView={isInView}
           />
 
@@ -64,7 +64,7 @@ const Industries = () => {
               'Staff workflow optimization',
               'Secure facility management',
             ]}
-            delay={0.1}
+            delay={0.4}
             isInView={isInView}
           />
 
@@ -76,7 +76,7 @@ const Industries = () => {
               'Store layout optimization',
               'Consumer experience analysis',
             ]}
-            delay={0.2}
+            delay={0.6}
             isInView={isInView}
           />
 
@@ -88,7 +88,7 @@ const Industries = () => {
               'Critical infrastructure protection',
               'Emergency response coordination',
             ]}
-            delay={0.3}
+            delay={0.8}
             isInView={isInView}
           />
 
@@ -100,7 +100,7 @@ const Industries = () => {
               'Property security',
               'Service quality monitoring',
             ]}
-            delay={0.4}
+            delay={1}
             isInView={isInView}
           />
 
@@ -112,7 +112,7 @@ const Industries = () => {
               'Passenger flow analysis',
               'Incident detection & response',
             ]}
-            delay={0.5}
+            delay={1.2}
             isInView={isInView}
           />
         </div>
@@ -136,7 +136,7 @@ const IndustryCard = ({
 }) => {
   return (
     <motion.div
-      className="bg-gradient-to-br from-emerald-950/30 to-black/50 backdrop-blur-sm p-6 rounded-2xl border border-emerald-900/20 hover:border-emerald-700/30 transition-all group"
+      className="bg-gradient-to-br from-emerald-950/50 to-black/20 backdrop-blur-sm p-6 rounded-2xl border border-emerald-700/30 hover:border-emerald-700/40 transition-all ease-out group"
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={{ duration: 0.5, delay }}

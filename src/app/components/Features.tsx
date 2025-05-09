@@ -11,7 +11,7 @@ const Features = () => {
 
   return (
     <section
-      className="py-20 bg-gradient-to-b from-black to-emerald-950/30 relative"
+      className="py-20 bg-gradient-to-b from-black to-emerald-950/22 relative"
       ref={ref}
     >
       <div className="container mx-auto px-4 md:px-6">
@@ -43,9 +43,9 @@ const Features = () => {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            <div className="relative aspect-video rounded-2xl overflow-hidden border border-emerald-900/30">
+            <div className="relative aspect-video rounded-3xl overflow-hidden border border-emerald-900/30">
               <Image
-                src="/placeholder.svg?height=600&width=800"
+                src="/Detection-Image.png"
                 alt="AI Video Analytics Dashboard"
                 width={800}
                 height={600}
@@ -62,10 +62,6 @@ const Features = () => {
                 </div>
               </div>
             </div>
-
-            {/* Floating elements */}
-            <div className="absolute -top-6 -right-6 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl"></div>
-            <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl"></div>
           </motion.div>
 
           <motion.div

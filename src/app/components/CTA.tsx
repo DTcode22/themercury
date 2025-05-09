@@ -11,18 +11,12 @@ const CTA = () => {
 
   return (
     <section
-      className="py-20 bg-gradient-to-b from-black to-emerald-950/40 relative"
+      className="py-22 bg-gradient-to-b from-black to-emerald-950/26 relative"
       ref={ref}
     >
       {/* Animated Gradient Background */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -inset-[10px] opacity-30">
-          <div className="absolute top-0 -left-40 w-80 h-80 bg-emerald-500/20 rounded-full blur-3xl animate-float"></div>
-          <div
-            className="absolute bottom-0 -right-40 w-80 h-80 bg-emerald-500/20 rounded-full blur-3xl animate-float"
-            style={{ animationDelay: '2s' }}
-          ></div>
-        </div>
+        <div className="absolute -inset-[10px] opacity-30"></div>
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
