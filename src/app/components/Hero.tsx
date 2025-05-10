@@ -46,7 +46,7 @@ const Hero = () => {
             The future of security and efficiency, realized today
           </h1>
           <p className="text-xl md:text-2xl text-white/80 mb-8">
-            See More, Secure Better
+            Redifine and Design
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link

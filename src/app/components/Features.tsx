@@ -1,12 +1,19 @@
 'use client';
 
+import type React from 'react';
+
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 
-const Features = () => {
-  const ref = useRef(null);
+interface FeatureItemProps {
+  title: string;
+  description: string;
+}
+
+const Features: React.FC = () => {
+  const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
@@ -17,7 +24,7 @@ const Features = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <motion.h2
-            className="text-3xl md:text-4xl font-bold mb-6"
+            className="text-3xl md:text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-emerald-400"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6 }}
@@ -101,17 +108,23 @@ const Features = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* Gradient pattern at the bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 overflow-hidden">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `radial-gradient(rgba(76, 175, 80, 0.3) 1px, transparent 1px)`,
+            backgroundSize: '30px 30px',
+            opacity: 0.3,
+          }}
+        ></div>
+      </div>
     </section>
   );
 };
 
-const FeatureItem = ({
-  title,
-  description,
-}: {
-  title: string;
-  description: string;
-}) => {
+const FeatureItem: React.FC<FeatureItemProps> = ({ title, description }) => {
   return (
     <div className="border-l-2 border-emerald-500 pl-6 py-2">
       <h3 className="text-xl font-bold mb-2">{title}</h3>
