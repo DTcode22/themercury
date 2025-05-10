@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function SecurityFeatures() {
   const [activeTab, setActiveTab] = useState('monitoring');
@@ -84,7 +85,7 @@ export default function SecurityFeatures() {
 
           <div className="relative flex items-center justify-center">
             <div className="rounded-2xl overflow-hidden border border-emerald-700/30 shadow-lg shadow-emerald-900/20">
-              <img
+              <Image
                 src="/fire.png"
                 alt="Security system demonstration"
                 className="w-full h-auto object-cover"
