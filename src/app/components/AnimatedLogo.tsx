@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
-const AnimatedLogo = () => {
+const AnimatedLogo = ({ dotAiColor }: { dotAiColor: string }) => {
+  // Changed prop to be required
   const [animationComplete, setAnimationComplete] = useState(false);
   const logoText = 'theMERCURY';
   const [visibleText, setVisibleText] = useState('');
@@ -34,7 +35,8 @@ const AnimatedLogo = () => {
         >
           {visibleText.substring(3)}
         </span>
-        <span className="text-emerald-500 font-light">.ai</span>
+        <span className={`font-light ${dotAiColor}`}>.ai</span>{' '}
+        {/* Apply dynamic color */}
       </h1>
     </div>
   );
