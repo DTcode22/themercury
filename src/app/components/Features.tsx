@@ -11,7 +11,7 @@ const Features = () => {
 
   return (
     <section
-      className="py-20 bg-gradient-to-b from-black to-emerald-950/22 relative"
+      className="py-30 bg-gradient-to-b from-black to-emerald-950/22 relative"
       ref={ref}
     >
       <div className="container mx-auto px-4 md:px-6">
