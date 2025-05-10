@@ -30,7 +30,7 @@ const Industries = () => {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6 }}
           >
-            Industries We Serve
+            Diverse Industry Applications
           </motion.h2>
           <motion.p
             className="text-lg text-white/70"
@@ -38,8 +38,9 @@ const Industries = () => {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Our AI-powered video analytics solutions are tailored to meet the
-            unique needs of various industries.
+            Our advanced technologies cater to a variety of industries,
+            providing customized solutions that offer improvement in both
+            security and efficiency.
           </motion.p>
         </div>
 

@@ -51,7 +51,7 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/solutions"
-              className="px-8 py-3 rounded-full bg-gradient-to-r from-emerald-600 to-green-500 text-white font-medium transition-all hover:shadow-lg hover:shadow-emerald-500/30 flex items-center gap-2 group"
+              className="px-8 py-3 rounded-full bg-emerald-500/10 backdrop-blur-md text-emerald-200 font-medium border border-emerald-400/20 transition-all hover:bg-gradient-to-r hover:from-emerald-950 hover:to-green-900 hover:text-white hover:shadow-sm hover:shadow-emerald-500/30 flex items-center gap-2 group"
             >
               Explore our Solutions
               <ArrowRight

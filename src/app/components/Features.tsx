@@ -22,7 +22,7 @@ const Features = () => {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6 }}
           >
-            Diverse Industry Applications
+            Intelligent Video Analytics
           </motion.h2>
           <motion.p
             className="text-lg text-white/70"
@@ -30,9 +30,10 @@ const Features = () => {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Our advanced technologies cater to a variety of industries,
-            providing customized solutions that offer improvement in both
-            security and efficiency.
+            Leverage Mercury&apos;s intelligent video analytics to improve
+            safety and operational efficiency. Our system supports a wide range
+            of video sources, from surveillance cameras to drones, providing
+            comprehensive coverage.
           </motion.p>
         </div>
 

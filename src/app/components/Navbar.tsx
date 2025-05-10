@@ -43,7 +43,7 @@ const Navbar = () => {
             <NavLink href="/hardware">Hardware</NavLink>
             <Link
               href="/contact"
-              className="px-5 py-2.5 rounded-full bg-gradient-to-r from-emerald-600 to-green-500 text-white font-medium transition-all hover:shadow-lg hover:shadow-emerald-500/30"
+              className="px-5 py-2.5 rounded-full bg-emerald-500/10 backdrop-blur-md text-emerald-200 font-medium border border-emerald-400/20 transition-all hover:bg-gradient-to-r hover:from-emerald-950 hover:to-green-900 hover:text-white hover:shadow-sm hover:shadow-emerald-500/30"
             >
               Contact us
             </Link>
