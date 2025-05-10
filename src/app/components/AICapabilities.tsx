@@ -30,7 +30,7 @@ const AICapabilities: React.FC = () => {
       className="py-30 relative overflow-hidden bg-gradient-to-b from-black via-black to-purple-950/20"
     >
       {/* Gradient pattern at the top */}
-      <div className="absolute top-0 left-0 right-0 h-32 overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 h-10 overflow-hidden">
         <div
           className="absolute inset-0"
           style={{
@@ -106,10 +106,6 @@ const AICapabilities: React.FC = () => {
           <rect width="100%" height="100%" fill="url(#neural-net)" />
         </svg>
       </div>
-
-      {/* Glowing orb effect */}
-      <div className="absolute -top-40 -right-40 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
-      <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <motion.div
