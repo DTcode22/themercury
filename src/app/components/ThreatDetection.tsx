@@ -37,27 +37,8 @@ const ThreatDetection: React.FC = () => {
   return (
     <section
       ref={ref}
-      className="py-20 relative overflow-hidden bg-gradient-to-b from-black via-black to-red-950/10"
+      className="py-20 relative overflow-hidden bg-gradient-to-b from-red-950/30 via-black to-red-950/30"
     >
-      {/* Gradient pattern at the top */}
-      <div className="absolute top-0 left-0 right-0 h-32 overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(rgba(59, 130, 246, 0.3) 1px, transparent 1px)`,
-            backgroundSize: '30px 30px',
-            opacity: 0.3,
-          }}
-        ></div>
-      </div>
-      {/* Animated background elements */}
-      <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-black to-transparent"></div>
-      <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-black to-transparent"></div>
-
-      {/* Glowing orb effect */}
-      <div className="absolute top-40 -right-20 w-96 h-96 bg-red-500/10 rounded-full blur-3xl"></div>
-      <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-red-500/5 rounded-full blur-3xl"></div>
-
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -144,17 +125,6 @@ const ThreatDetection: React.FC = () => {
             isInView={isInView}
           />
         </div>
-      </div>
-      {/* Gradient pattern at the bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(rgba(239, 68, 68, 0.3) 1px, transparent 1px)`,
-            backgroundSize: '30px 30px',
-            opacity: 0.3,
-          }}
-        ></div>
       </div>
     </section>
   );

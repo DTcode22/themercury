@@ -27,7 +27,7 @@ const AICapabilities: React.FC = () => {
   return (
     <section
       ref={ref}
-      className="py-30 relative overflow-hidden bg-gradient-to-b from-black via-black to-purple-950/20"
+      className="py-30 relative overflow-hidden bg-gradient-to-b from-purple-950/20 via-black to-purple-950/20"
     >
       {/* Gradient pattern at the top */}
       <div className="absolute top-0 left-0 right-0 h-10 overflow-hidden">

@@ -29,6 +29,7 @@ const CTA = () => {
             opacity: 0.3,
           }}
         ></div>
+
         {/* Neural network animation at the top */}
         <div className="absolute inset-0 opacity-20">
           <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">

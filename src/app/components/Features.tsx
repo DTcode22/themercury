@@ -32,7 +32,7 @@ const Features: React.FC<FeaturesProps> = ({
 
   return (
     <section
-      className={`py-16 bg-gradient-to-b from-black ${themeDetails.mainBgToColor} relative`} // py-16 instead of py-30 to account for internal padding
+      className={`py-32 bg-gradient-to-b from-black ${themeDetails.mainBgToColor} relative`} // py-16 instead of py-30 to account for internal padding
       ref={ref}
     >
       <div className="container mx-auto px-4 md:px-6 relative z-10 pt-20 pb-20">
