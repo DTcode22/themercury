@@ -28,7 +28,7 @@ export default function RootLayout({
           {/* Added SectionThemeProvider wrapper */}
           <ThemeProvider attribute="class" defaultTheme="dark">
             <div className="relative min-h-screen">
-              <div className="absolute inset-0 bg-[url('/images/grid.png')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+              <div className="grid-pattern absolute inset-0 bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-30"></div>
               <div className="relative">
                 <Navbar />
                 <main>{children}</main>

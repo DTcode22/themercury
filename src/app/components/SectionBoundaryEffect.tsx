@@ -43,7 +43,6 @@ const SectionBoundaryEffect: React.FC<SectionBoundaryEffectProps> = ({
       {/* Neural Network SVG Pattern */}
       <div className="absolute inset-0 opacity-40">
         {' '}
-        {/* Slightly more visible */}
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern
@@ -55,7 +54,6 @@ const SectionBoundaryEffect: React.FC<SectionBoundaryEffectProps> = ({
               patternUnits="userSpaceOnUse"
             >
               <circle cx="50" cy="50" r="0.8" fill={themeColorHex} />{' '}
-              {/* Slightly smaller circles */}
               <circle cx="0" cy="0" r="0.8" fill={themeColorHex} />
               <circle cx="0" cy="100" r="0.8" fill={themeColorHex} />
               <circle cx="100" cy="0" r="0.8" fill={themeColorHex} />
@@ -68,7 +66,6 @@ const SectionBoundaryEffect: React.FC<SectionBoundaryEffectProps> = ({
                 stroke={themeColorHex}
                 strokeWidth="0.15"
               />{' '}
-              {/* Thinner lines */}
               <line
                 x1="50"
                 y1="50"

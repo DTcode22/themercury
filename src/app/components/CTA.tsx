@@ -14,11 +14,6 @@ const CTA = () => {
       className="py-80 bg-gradient-to-b from-gray-900/60 via-black to-gray-900/60 relative"
       ref={ref}
     >
-      {/* Animated Gradient Background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -inset-[10px] opacity-30"></div>
-      </div>
-
       {/* Gradient pattern at the top */}
       <div className="absolute top-0 left-0 right-0 h-60 overflow-hidden bg-gradient-to-b from-gray-900/90 to-transparent">
         <div

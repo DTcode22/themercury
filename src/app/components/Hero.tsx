@@ -5,25 +5,6 @@ import { ArrowRight } from 'lucide-react';
 const Hero = () => {
   return (
     <section className="relative min-h-screen w-full flex items-center overflow-hidden pt-20">
-      <svg width="0" height="0" style={{ position: 'absolute' }}>
-        <filter id="grid‑warp">
-          {/* generiše „šum” koji pomera piksele */}
-          <feTurbulence
-            type="turbulence"
-            baseFrequency="0.15"
-            numOctaves="2"
-            result="noise"
-          />
-          {/* pomera originalni grid po šumnoj mapi */}
-          <feDisplacementMap
-            in2="noise"
-            in="SourceGraphic"
-            scale="40"
-            xChannelSelector="R"
-            yChannelSelector="G"
-          />
-        </filter>
-      </svg>
       {/* Animated Background with Grid Pattern */}
       <div
         className="absolute inset-0 w-full h-full transition-transform duration-200 ease-out"

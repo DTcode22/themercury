@@ -1,10 +1,10 @@
 'use client';
 
 import type React from 'react';
-
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Brain, Cpu, Network, Lock, Zap, BarChart3 } from 'lucide-react';
+import { ComponentProps as PageSectionProps } from '@/app/page'; // For accepting props from page.tsx
 
 interface CapabilityCardProps {
   icon: React.ReactNode;
@@ -20,7 +20,7 @@ interface TechStackItemProps {
   percentage: number;
 }
 
-const AICapabilities: React.FC = () => {
+const AICapabilities: React.FC<PageSectionProps> = ({}) => {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 

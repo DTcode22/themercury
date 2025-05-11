@@ -1,4 +1,3 @@
-// src/app/page.tsx
 import Hero from './components/Hero';
 import Features from './components/Features';
 import CTA from './components/CTA';
@@ -8,8 +7,7 @@ import AICapabilities from './components/AICapabilities';
 import SectionWatcher from './components/SectionWatcher';
 import { ThemeName } from '@/context/SectionThemeContext';
 
-// Define an interface for the component props
-interface ComponentProps {
+export interface ComponentProps {
   currentSectionThemeName: ThemeName;
   isFirstSection: boolean;
   isLastSection: boolean;
@@ -46,7 +44,6 @@ export default function Home() {
         const isLastSection = index === sectionDeclarations.length - 1;
         const isFirstSection = index === 0;
 
-        // Use the defined interface instead of `any`
         const componentProps: ComponentProps = {
           currentSectionThemeName: theme,
           isFirstSection: isFirstSection,

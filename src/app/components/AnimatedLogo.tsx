@@ -36,7 +36,6 @@ const AnimatedLogo = ({ dotAiColor }: { dotAiColor: string }) => {
           {visibleText.substring(3)}
         </span>
         <span className={`font-light ${dotAiColor}`}>.ai</span>{' '}
-        {/* Apply dynamic color */}
       </h1>
     </div>
   );
