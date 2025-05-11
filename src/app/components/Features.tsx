@@ -1,30 +1,46 @@
+// src/app/components/Features.tsx
 'use client';
 
 import type React from 'react';
-
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+import SectionBoundaryEffect from './SectionBoundaryEffect';
+import { ThemeName } from '@/context/SectionThemeContext';
+import { THEME_COLORS_MAP } from '@/app/utils/themeColors';
 
 interface FeatureItemProps {
   title: string;
   description: string;
 }
 
-const Features: React.FC = () => {
+interface FeaturesProps {
+  currentSectionThemeName: ThemeName;
+  isFirstSection?: boolean; // Not used by Features for top, but passed
+  isLastSection?: boolean;
+}
+
+const Features: React.FC<FeaturesProps> = ({
+  currentSectionThemeName,
+  isLastSection,
+}) => {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
+  const themeDetails = THEME_COLORS_MAP[currentSectionThemeName];
+
   return (
     <section
-      className="py-30 bg-gradient-to-b from-black to-emerald-950/22 relative"
+      className={`py-16 bg-gradient-to-b from-black ${themeDetails.mainBgToColor} relative`} // py-16 instead of py-30 to account for internal padding
       ref={ref}
     >
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="container mx-auto px-4 md:px-6 relative z-10 pt-20 pb-20">
+        {' '}
+        {/* Added pt/pb for boundary overlap */}
         <div className="max-w-3xl mx-auto text-center mb-16">
           <motion.h2
-            className="text-3xl md:text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-emerald-400"
+            className={`text-3xl md:text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white ${themeDetails.accentColorClass}`}
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6 }}
@@ -43,7 +59,6 @@ const Features: React.FC = () => {
             comprehensive coverage.
           </motion.p>
         </div>
-
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -53,11 +68,12 @@ const Features: React.FC = () => {
           >
             <div className="relative aspect-video rounded-3xl overflow-hidden border border-emerald-900/30">
               <Image
-                src="/Detection-Image.png"
+                src="/Detection-Image.png" // Ensure this image exists
                 alt="AI Video Analytics Dashboard"
                 width={800}
                 height={600}
                 className="object-cover"
+                priority={false} // only Hero image should be priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end">
                 <div className="p-6">
@@ -82,21 +98,24 @@ const Features: React.FC = () => {
               title="Advanced Human Detection"
               description="Our AI algorithms accurately identify and track human movement in real-time, representing subjects with precise bounding boxes."
             />
-
             <FeatureItem
               title="Pattern Analysis"
               description="Analyze walking and working patterns to identify correct behaviors and detect anomalies or potential security threats."
             />
-
             <FeatureItem
               title="Predictive Analytics"
               description="Leverage historical data to predict potential issues before they occur, enabling proactive security measures."
             />
-
             <div className="pt-4">
               <a
                 href="/solutions"
-                className="inline-flex items-center text-emerald-400 font-medium group"
+                className={`inline-flex items-center ${
+                  currentSectionThemeName === 'emerald'
+                    ? 'text-emerald-400'
+                    : currentSectionThemeName === 'blue'
+                    ? 'text-blue-400'
+                    : 'text-gray-400'
+                } font-medium group`}
               >
                 Learn more about our technology
                 <ArrowRight
@@ -109,17 +128,14 @@ const Features: React.FC = () => {
         </div>
       </div>
 
-      {/* Gradient pattern at the bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(rgba(76, 175, 80, 0.3) 1px, transparent 1px)`,
-            backgroundSize: '30px 30px',
-            opacity: 0.3,
-          }}
-        ></div>
-      </div>
+      {!isLastSection && (
+        <SectionBoundaryEffect
+          position="bottom"
+          themeColorRGB={themeDetails.rgb}
+          themeColorHex={themeDetails.hex}
+          overlaySourceColorCss={themeDetails.mainBgToColor.replace('to-', '')} // e.g. 'emerald-950/22'
+        />
+      )}
     </section>
   );
 };
@@ -127,6 +143,8 @@ const Features: React.FC = () => {
 const FeatureItem: React.FC<FeatureItemProps> = ({ title, description }) => {
   return (
     <div className="border-l-2 border-emerald-500 pl-6 py-2">
+      {' '}
+      {/* Border color could also be dynamic */}
       <h3 className="text-xl font-bold mb-2">{title}</h3>
       <p className="text-white/70">{description}</p>
     </div>
