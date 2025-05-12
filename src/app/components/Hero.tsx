@@ -49,13 +49,21 @@ const Hero = () => {
     useState<AnimationPhase>('typing');
   const [currentIcon, setCurrentIcon] = useState<IconKey>('Shield');
 
-  const typingSpeedBase = useRef(30);
-  const typingSpeedVariance = useRef(15);
-  const erasingSpeedBase = useRef(15);
-  const subheadingPauseDurationMultiplier = 0.7; // Reduced from 1.2
-  const subheadingTypingSpeedMultiplier = 1.0; // Reduced from 1.2
-  const subheadingErasingSpeedMultiplier = 1.0; // Reduced from 1.1
-  const basePauseDuration = useRef(2800);
+  // State to track client-side mounting
+  const [isClientMounted, setIsClientMounted] = useState(false);
+
+  useEffect(() => {
+    setIsClientMounted(true);
+  }, []);
+
+  // Slower transition speeds
+  const typingSpeedBase = useRef(70);
+  const typingSpeedVariance = useRef(25);
+  const erasingSpeedBase = useRef(40);
+  const subheadingPauseDurationMultiplier = 0.9;
+  const subheadingTypingSpeedMultiplier = 1.0;
+  const subheadingErasingSpeedMultiplier = 1.0;
+  const basePauseDuration = useRef(3500);
 
   const [gridOpacity, setGridOpacity] = useState(0.5);
   const [gridScale, setGridScale] = useState(5);
@@ -70,6 +78,8 @@ const Hero = () => {
   };
 
   useEffect(() => {
+    if (!isClientMounted) return; // Don't run animation on server or before client mount
+
     let animationTimeout: NodeJS.Timeout | undefined;
     const currentPhrase = headingPhrases[headingIndex];
 
@@ -114,9 +124,17 @@ const Hero = () => {
     return () => {
       if (animationTimeout) clearTimeout(animationTimeout);
     };
-  }, [displayedHeading, headingIndex, headingPhase, headingPhrases]);
+  }, [
+    isClientMounted,
+    displayedHeading,
+    headingIndex,
+    headingPhase,
+    headingPhrases,
+  ]);
 
   useEffect(() => {
+    if (!isClientMounted) return; // Don't run animation on server or before client mount
+
     let animationTimeout: NodeJS.Timeout | undefined;
     const currentPhrase = subheadingPhrases[subheadingIndex];
 
@@ -168,6 +186,7 @@ const Hero = () => {
       if (animationTimeout) clearTimeout(animationTimeout);
     };
   }, [
+    isClientMounted,
     displayedSubheading,
     subheadingIndex,
     subheadingPhase,
@@ -239,32 +258,21 @@ const Hero = () => {
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter mb-6 leading-tight min-h-[4rem] md:min-h-[5rem] lg:min-h-[6rem] flex items-center justify-center">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter mb-6 leading-tight min-h-[5rem] sm:min-h-[5.5rem] md:min-h-[7.5rem] lg:min-h-[9rem] flex items-center justify-center">
             <span className="inline-block">
-              {displayedHeading}
-              {(headingPhase === 'typing' || headingPhase === 'pausing') &&
-                displayedHeading.length > 0 && (
-                  <span className="inline-block w-1 h-12 bg-emerald-400 ml-1 animate-pulse"></span>
-                )}
-              {headingPhase === 'typing' && displayedHeading.length === 0 && (
-                <span className="inline-block w-1 h-12 bg-emerald-400 ml-1 animate-pulse"></span>
-              )}
+              {isClientMounted ? displayedHeading : ''}{' '}
+              {/* Render only on client after mount */}
             </span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-white/80 mb-8 min-h-[2rem] md:min-h-[2.5rem] flex items-center justify-center gap-2">
+          <p className="text-lg sm:text-xl md:text-2xl text-white/80 mb-8 min-h-[3rem] sm:min-h-[3.5rem] md:min-h-[4rem] flex items-center justify-center gap-2">
             <span className="flex items-center">
+              {/* Icon can render initially as its default is consistent */}
               {iconComponents[currentIcon]}
-              <span className="mx-2">{displayedSubheading}</span>
-              {(subheadingPhase === 'typing' ||
-                subheadingPhase === 'pausing') &&
-                displayedSubheading.length > 0 && (
-                  <span className="inline-block w-0.5 h-6 bg-emerald-400 animate-pulse"></span>
-                )}
-              {subheadingPhase === 'typing' &&
-                displayedSubheading.length === 0 && (
-                  <span className="inline-block w-0.5 h-6 bg-emerald-400 animate-pulse"></span>
-                )}
+              <span className="mx-2">
+                {isClientMounted ? displayedSubheading : ''}{' '}
+                {/* Render only on client after mount */}
+              </span>
             </span>
           </p>
 
