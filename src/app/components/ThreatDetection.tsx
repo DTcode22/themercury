@@ -6,7 +6,7 @@ import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import {
   AlertTriangle,
-  PenIcon as Gun,
+  PenIcon as Gun, // Using PenIcon as placeholder, consider replacing with a more appropriate icon
   Flame,
   Skull,
   Shield,
@@ -15,7 +15,6 @@ import {
 import { ComponentProps as PageSectionProps } from '@/app/page';
 import { THEME_COLORS_MAP } from '@/app/utils/themeColors';
 
-// Original Interface Definitions
 interface ThreatDemoButtonProps {
   active: boolean;
   onClick: () => void;
@@ -36,7 +35,7 @@ const ThreatDetection: React.FC<PageSectionProps> = ({
   currentSectionThemeName,
 }) => {
   const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const isInView = useInView(ref, { once: true, amount: 0.1 }); // Lower amount for mobile
   const [activeDemo, setActiveDemo] = useState<string>('firearm');
 
   const themeDetails = THEME_COLORS_MAP[currentSectionThemeName];
@@ -46,10 +45,10 @@ const ThreatDetection: React.FC<PageSectionProps> = ({
   return (
     <section
       ref={ref}
-      className={`py-20 relative overflow-hidden bg-gradient-to-b ${themeDetails.sectionBgGradient}`}
+      className={`py-16 md:py-20 relative overflow-hidden bg-gradient-to-b ${themeDetails.sectionBgGradient}`}
     >
       {/* Gradient pattern at the top */}
-      <div className="absolute top-0 left-0 right-0 h-60 overflow-hidden pointer-events-none">
+      <div className="absolute top-0 left-0 right-0 h-40 md:h-60 overflow-hidden pointer-events-none">
         <div
           className="absolute inset-0"
           style={{
@@ -135,11 +134,10 @@ const ThreatDetection: React.FC<PageSectionProps> = ({
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto text-center mb-16"
+          className="max-w-3xl mx-auto text-center mb-12 md:mb-16"
         >
-          {/* Title accent uses themeDetails */}
           <div
-            className={`inline-flex items-center px-4 py-2 rounded-full mb-6`}
+            className={`inline-flex items-center px-3 py-1.5 md:px-4 md:py-2 rounded-full mb-4 md:mb-6 text-sm md:text-base`}
             style={{
               backgroundColor: `${themeDetails.hex}1A`,
               color: themeDetails.hex,
@@ -149,23 +147,22 @@ const ThreatDetection: React.FC<PageSectionProps> = ({
             Advanced Threat Detection
           </div>
           <h2
-            className={`text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white ${themeDetails.accentColorClass}`}
+            className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white ${themeDetails.accentColorClass}`}
           >
             Identify & Neutralize Threats in Real-Time
           </h2>
-          <p className="text-lg text-white/70">
+          <p className="text-base md:text-lg text-white/70">
             Our AI-powered system can detect potential threats including
             firearms, fire hazards, and suspicious behavior patterns before they
             escalate into dangerous situations.
           </p>
         </motion.div>
 
-        {/* Threat Detection Demo - Reverted to original styling */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+        {/* Threat Detection Demo - Stacks on mobile, buttons first */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
           <div className="lg:col-span-2 order-2 lg:order-1">
-            {/* Demo container border uses themeDetails for subtle connection */}
             <div
-              className="relative aspect-video rounded-2xl overflow-hidden border"
+              className="relative aspect-video rounded-xl md:rounded-2xl overflow-hidden border" // smaller radius on mobile
               style={{ borderColor: `${themeDetails.hex}4D` }}
             >
               {activeDemo === 'firearm' && <FirearmDetectionDemo />}
@@ -173,49 +170,50 @@ const ThreatDetection: React.FC<PageSectionProps> = ({
               {activeDemo === 'behavior' && <SuspiciousBehaviorDemo />}
             </div>
           </div>
-          <div className="order-1 lg:order-2 flex flex-col space-y-4">
+          <div className="order-1 lg:order-2 flex flex-col space-y-3 md:space-y-4">
             <ThreatDemoButton
               active={activeDemo === 'firearm'}
               onClick={() => setActiveDemo('firearm')}
-              icon={<Gun size={20} />}
+              icon={<Gun size={18} className="md:size-20" />}
               title="Firearm Detection"
               description="Instantly identify weapons with high accuracy"
             />
             <ThreatDemoButton
               active={activeDemo === 'fire'}
               onClick={() => setActiveDemo('fire')}
-              icon={<Flame size={20} />}
+              icon={<Flame size={18} className="md:size-20" />}
               title="Fire & Hazard Detection"
               description="Early warning system for fire and smoke"
             />
             <ThreatDemoButton
               active={activeDemo === 'behavior'}
               onClick={() => setActiveDemo('behavior')}
-              icon={<Skull size={20} />}
+              icon={<Skull size={18} className="md:size-20" />}
               title="Suspicious Behavior"
               description="Identify unusual patterns and activities"
             />
           </div>
         </div>
 
-        {/* Key Features - Reverted to original styling */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           <FeatureCard
-            icon={<Eye className="w-10 h-10 text-red-400" />}
+            icon={<Eye className="w-8 h-8 md:w-10 md:h-10 text-red-400" />}
             title="99.7% Detection Accuracy"
             description="Our advanced neural networks provide industry-leading threat detection accuracy with minimal false positives."
             delay={0}
             isInView={isInView}
           />
           <FeatureCard
-            icon={<Shield className="w-10 h-10 text-red-400" />}
+            icon={<Shield className="w-8 h-8 md:w-10 md:h-10 text-red-400" />}
             title="Instant Alert System"
             description="Immediate notifications to security personnel and automated integration with existing security protocols."
             delay={0.2}
             isInView={isInView}
           />
           <FeatureCard
-            icon={<AlertTriangle className="w-10 h-10 text-red-400" />}
+            icon={
+              <AlertTriangle className="w-8 h-8 md:w-10 md:h-10 text-red-400" />
+            }
             title="Preventative Analysis"
             description="Identify potential threats before they materialize through behavioral and contextual analysis."
             delay={0.4}
@@ -224,8 +222,7 @@ const ThreatDetection: React.FC<PageSectionProps> = ({
         </div>
       </div>
 
-      {/* Gradient pattern at the bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-60 overflow-hidden pointer-events-none">
+      <div className="absolute bottom-0 left-0 right-0 h-40 md:h-60 overflow-hidden pointer-events-none">
         <div
           className="absolute inset-0"
           style={{
@@ -239,7 +236,6 @@ const ThreatDetection: React.FC<PageSectionProps> = ({
   );
 };
 
-// Reverted Sub-components to original styling
 const ThreatDemoButton: React.FC<ThreatDemoButtonProps> = ({
   active,
   onClick,
@@ -249,66 +245,67 @@ const ThreatDemoButton: React.FC<ThreatDemoButtonProps> = ({
 }) => (
   <button
     onClick={onClick}
-    className={`p-4 rounded-xl text-left transition-all ${
+    className={`p-3 md:p-4 rounded-lg md:rounded-xl text-left transition-all ${
       active
-        ? 'bg-gradient-to-r from-red-950 to-red-900/50 border border-red-500/30' // Original red active
+        ? 'bg-gradient-to-r from-red-950 to-red-900/50 border border-red-500/30'
         : 'bg-black/30 border border-white/10 hover:bg-black/50'
     }`}
   >
     <div className="flex items-start">
       <div
-        className={`p-2 rounded-lg ${
+        className={`p-1.5 md:p-2 rounded-md md:rounded-lg ${
           active ? 'bg-red-500/20 text-red-400' : 'bg-white/10 text-white/70'
         }`}
       >
         {icon}
       </div>
-      <div className="ml-4">
-        <h3 className={`font-bold ${active ? 'text-red-400' : 'text-white'}`}>
+      <div className="ml-2.5 md:ml-4">
+        <h3
+          className={`font-bold text-sm md:text-base ${
+            active ? 'text-red-400' : 'text-white'
+          }`}
+        >
           {title}
         </h3>
-        <p className="text-sm text-white/60 mt-1">{description}</p>
+        <p className="text-xs md:text-sm text-white/60 mt-0.5 md:mt-1">
+          {description}
+        </p>
       </div>
     </div>
   </button>
 );
 
-// Reverted Demo components to original styling
 const FirearmDetectionDemo: React.FC = () => (
   <div className="relative w-full h-full">
-    <div className="absolute inset-0 bg-[url('/placeholder.svg?height=600&width=1200')] bg-cover"></div>
+    <div className="absolute inset-0 bg-[url('/placeholder.svg?height=300&width=600')] md:bg-[url('/placeholder.svg?height=600&width=1200')] bg-cover"></div>
     <div className="absolute inset-0">
-      <div className="absolute top-[30%] left-[40%] w-20 h-48 border-2 border-red-500 rounded-sm animate-pulse">
-        <div className="absolute -top-8 left-0 bg-red-500 text-white text-xs px-2 py-1 rounded flex items-center">
-          {' '}
-          <Gun size={12} className="mr-1" /> FIREARM DETECTED{' '}
+      {/* Smaller bounding box for mobile */}
+      <div className="absolute top-[30%] left-[35%] w-12 h-32 md:top-[30%] md:left-[40%] md:w-20 md:h-48 border-2 border-red-500 rounded-sm animate-pulse">
+        <div className="absolute -top-6 left-0 bg-red-500 text-white text-[10px] md:text-xs px-1.5 py-0.5 md:px-2 md:py-1 rounded flex items-center">
+          <Gun size={10} className="mr-1 md:size-12" /> FIREARM
         </div>
       </div>
-      <div className="absolute top-4 right-4 bg-black/80 border border-red-500 p-4 rounded-lg max-w-xs animate-pulse">
-        <div className="flex items-center text-red-500 mb-2">
-          {' '}
-          <AlertTriangle size={16} className="mr-2" />{' '}
-          <span className="font-bold">CRITICAL ALERT</span>{' '}
+      {/* Smaller alert box, positioned for mobile */}
+      <div className="absolute top-2 right-2 md:top-4 md:right-4 bg-black/80 border border-red-500 p-2 md:p-4 rounded-md md:rounded-lg max-w-[180px] md:max-w-xs animate-pulse">
+        <div className="flex items-center text-red-500 mb-1 md:mb-2">
+          <AlertTriangle size={12} className="mr-1 md:size-16 md:mr-2" />
+          <span className="font-bold text-[10px] md:text-sm">
+            CRITICAL ALERT
+          </span>
         </div>
-        <p className="text-white text-sm">
-          {' '}
-          Firearm detected in Zone B. Security personnel dispatched. Lockdown
-          protocols initiated.{' '}
+        <p className="text-white text-[9px] md:text-sm">
+          Firearm detected. Security dispatched. Lockdown initiated.
         </p>
       </div>
-      <div className="absolute bottom-4 left-4 bg-black/80 p-3 rounded-lg">
-        <div className="text-xs text-white/90">
-          <div className="flex justify-between mb-1">
-            {' '}
-            <span>Detection Confidence:</span>{' '}
-            <span className="text-red-400">98.7%</span>{' '}
+      {/* Smaller confidence score box */}
+      <div className="absolute bottom-2 left-2 md:bottom-4 md:left-4 bg-black/80 p-1.5 md:p-3 rounded-md md:rounded-lg">
+        <div className="text-[9px] md:text-xs text-white/90">
+          <div className="flex justify-between mb-0.5 md:mb-1">
+            <span>Confidence:</span>
+            <span className="text-red-400">98.7%</span>
           </div>
-          <div className="h-1 bg-white/20 rounded-full overflow-hidden">
-            {' '}
-            <div
-              className="h-full bg-red-500"
-              style={{ width: '98.7%' }}
-            ></div>{' '}
+          <div className="h-0.5 md:h-1 bg-white/20 rounded-full overflow-hidden">
+            <div className="h-full bg-red-500" style={{ width: '98.7%' }}></div>
           </div>
         </div>
       </div>
@@ -318,60 +315,54 @@ const FirearmDetectionDemo: React.FC = () => (
 
 const FireHazardDemo: React.FC = () => (
   <div className="relative w-full h-full">
-    <div className="absolute inset-0 bg-[url('/placeholder.svg?height=600&width=1200')] bg-cover"></div>
+    <div className="absolute inset-0 bg-[url('/placeholder.svg?height=300&width=600')] md:bg-[url('/placeholder.svg?height=600&width=1200')] bg-cover"></div>
     <div className="absolute inset-0">
-      <div className="absolute top-[20%] left-[30%] w-32 h-32 border-2 border-orange-500 rounded-sm animate-pulse">
-        <div className="absolute -top-8 left-0 bg-orange-500 text-white text-xs px-2 py-1 rounded flex items-center">
-          {' '}
-          <Flame size={12} className="mr-1" /> FIRE DETECTED{' '}
+      {/* Scaled detection boxes */}
+      <div className="absolute top-[25%] left-[20%] w-20 h-20 md:top-[20%] md:left-[30%] md:w-32 md:h-32 border-2 border-orange-500 rounded-sm animate-pulse">
+        <div className="absolute -top-6 left-0 bg-orange-500 text-white text-[10px] md:text-xs px-1.5 py-0.5 md:px-2 md:py-1 rounded flex items-center">
+          <Flame size={10} className="mr-1 md:size-12" /> FIRE
         </div>
       </div>
-      <div className="absolute top-[15%] left-[25%] w-48 h-24 border-2 border-orange-300 rounded-sm animate-pulse opacity-70">
-        <div className="absolute -top-8 left-0 bg-orange-300 text-white text-xs px-2 py-1 rounded flex items-center">
-          {' '}
-          <Flame size={12} className="mr-1" /> SMOKE DETECTED{' '}
+      <div className="absolute top-[20%] left-[15%] w-32 h-16 md:top-[15%] md:left-[25%] md:w-48 md:h-24 border-2 border-orange-300 rounded-sm animate-pulse opacity-70">
+        <div className="absolute -top-6 left-0 bg-orange-300 text-white text-[10px] md:text-xs px-1.5 py-0.5 md:px-2 md:py-1 rounded flex items-center">
+          <Flame size={10} className="mr-1 md:size-12" /> SMOKE
         </div>
       </div>
-      <div className="absolute top-4 right-4 bg-black/80 border border-orange-500 p-4 rounded-lg max-w-xs animate-pulse">
-        <div className="flex items-center text-orange-500 mb-2">
-          {' '}
-          <AlertTriangle size={16} className="mr-2" />{' '}
-          <span className="font-bold">FIRE HAZARD ALERT</span>{' '}
+      {/* Scaled alert box */}
+      <div className="absolute top-2 right-2 md:top-4 md:right-4 bg-black/80 border border-orange-500 p-2 md:p-4 rounded-md md:rounded-lg max-w-[180px] md:max-w-xs animate-pulse">
+        <div className="flex items-center text-orange-500 mb-1 md:mb-2">
+          <AlertTriangle size={12} className="mr-1 md:size-16 md:mr-2" />
+          <span className="font-bold text-[10px] md:text-sm">FIRE HAZARD</span>
         </div>
-        <p className="text-white text-sm">
-          {' '}
-          Fire detected in Server Room. Fire suppression system activated.
-          Emergency services notified.{' '}
+        <p className="text-white text-[9px] md:text-sm">
+          Fire detected. Suppression activated. Services notified.
         </p>
       </div>
-      <div className="absolute bottom-4 left-4 bg-black/80 p-3 rounded-lg">
-        <div className="text-xs text-white/90 space-y-2">
+      {/* Scaled info box */}
+      <div className="absolute bottom-2 left-2 md:bottom-4 md:left-4 bg-black/80 p-1.5 md:p-3 rounded-md md:rounded-lg">
+        <div className="text-[9px] md:text-xs text-white/90 space-y-1 md:space-y-2">
           <div>
-            <div className="flex justify-between mb-1">
-              {' '}
-              <span>Temperature:</span>{' '}
-              <span className="text-orange-400">142°F</span>{' '}
+            <div className="flex justify-between mb-0.5 md:mb-1">
+              <span>Temp:</span>
+              <span className="text-orange-400">142°F</span>
             </div>
-            <div className="h-1 bg-white/20 rounded-full overflow-hidden">
-              {' '}
+            <div className="h-0.5 md:h-1 bg-white/20 rounded-full overflow-hidden">
               <div
                 className="h-full bg-gradient-to-r from-green-500 via-yellow-500 to-red-500"
                 style={{ width: '70%' }}
-              ></div>{' '}
+              ></div>
             </div>
           </div>
           <div>
-            <div className="flex justify-between mb-1">
-              {' '}
-              <span>Smoke Density:</span>{' '}
-              <span className="text-orange-400">High</span>{' '}
+            <div className="flex justify-between mb-0.5 md:mb-1">
+              <span>Smoke:</span>
+              <span className="text-orange-400">High</span>
             </div>
-            <div className="h-1 bg-white/20 rounded-full overflow-hidden">
-              {' '}
+            <div className="h-0.5 md:h-1 bg-white/20 rounded-full overflow-hidden">
               <div
                 className="h-full bg-orange-500"
                 style={{ width: '85%' }}
-              ></div>{' '}
+              ></div>
             </div>
           </div>
         </div>
@@ -382,64 +373,66 @@ const FireHazardDemo: React.FC = () => (
 
 const SuspiciousBehaviorDemo: React.FC = () => (
   <div className="relative w-full h-full">
-    <div className="absolute inset-0 bg-[url('/placeholder.svg?height=600&width=1200')] bg-cover"></div>
+    <div className="absolute inset-0 bg-[url('/placeholder.svg?height=300&width=600')] md:bg-[url('/placeholder.svg?height=600&width=1200')] bg-cover"></div>
     <div className="absolute inset-0">
-      <div className="absolute top-[30%] left-[40%] w-16 h-40 border-2 border-amber-500 rounded-sm animate-pulse">
-        <div className="absolute -top-8 left-0 bg-amber-500 text-white text-xs px-2 py-1 rounded flex items-center">
-          {' '}
-          <AlertTriangle size={12} className="mr-1" /> SUSPICIOUS BEHAVIOR{' '}
+      {/* Scaled detection box */}
+      <div className="absolute top-[30%] left-[35%] w-12 h-32 md:top-[30%] md:left-[40%] md:w-16 md:h-40 border-2 border-amber-500 rounded-sm animate-pulse">
+        <div className="absolute -top-6 left-0 bg-amber-500 text-white text-[10px] md:text-xs px-1.5 py-0.5 md:px-2 md:py-1 rounded flex items-center">
+          <AlertTriangle size={10} className="mr-1 md:size-12" /> SUSPICIOUS
         </div>
       </div>
-      <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 10 }}>
-        {' '}
+      {/* SVG path might need viewBox adjustment or scaling if it looks off */}
+      <svg
+        className="absolute inset-0 w-full h-full"
+        viewBox="0 0 800 450"
+        preserveAspectRatio="xMidYMid meet"
+        style={{ zIndex: 10 }}
+      >
         <path
-          d="M300,400 C350,350 400,300 450,350 C500,400 550,450 600,400"
+          d="M250,350 C300,300 350,250 400,300 C450,350 500,400 550,350"
           stroke="rgba(245, 158, 11, 0.7)"
-          strokeWidth="3"
-          strokeDasharray="10,5"
+          strokeWidth="2"
+          strokeDasharray="8,4"
           fill="none"
-        />{' '}
+        />
       </svg>
-      <div className="absolute top-4 right-4 bg-black/80 border border-amber-500 p-4 rounded-lg max-w-xs">
-        <div className="flex items-center text-amber-500 mb-2">
-          {' '}
-          <AlertTriangle size={16} className="mr-2" />{' '}
-          <span className="font-bold">BEHAVIOR ALERT</span>{' '}
+      {/* Scaled alert box */}
+      <div className="absolute top-2 right-2 md:top-4 md:right-4 bg-black/80 border border-amber-500 p-2 md:p-4 rounded-md md:rounded-lg max-w-[180px] md:max-w-xs">
+        <div className="flex items-center text-amber-500 mb-1 md:mb-2">
+          <AlertTriangle size={12} className="mr-1 md:size-16 md:mr-2" />
+          <span className="font-bold text-[10px] md:text-sm">
+            BEHAVIOR ALERT
+          </span>
         </div>
-        <p className="text-white text-sm">
-          {' '}
-          Unusual loitering detected in restricted area. Subject has been in
-          zone for 5:32 minutes. Security notified.{' '}
+        <p className="text-white text-[9px] md:text-sm">
+          Unusual loitering detected. Subject in zone 5:32m. Security notified.
         </p>
       </div>
-      <div className="absolute bottom-4 left-4 bg-black/80 p-3 rounded-lg">
-        <div className="text-xs text-white/90 space-y-2">
+      {/* Scaled info box */}
+      <div className="absolute bottom-2 left-2 md:bottom-4 md:left-4 bg-black/80 p-1.5 md:p-3 rounded-md md:rounded-lg">
+        <div className="text-[9px] md:text-xs text-white/90 space-y-1 md:space-y-2">
           <div>
-            <div className="flex justify-between mb-1">
-              {' '}
-              <span>Behavior Analysis:</span>{' '}
-              <span className="text-amber-400">Suspicious</span>{' '}
+            <div className="flex justify-between mb-0.5 md:mb-1">
+              <span>Analysis:</span>
+              <span className="text-amber-400">Suspicious</span>
             </div>
-            <div className="h-1 bg-white/20 rounded-full overflow-hidden">
-              {' '}
+            <div className="h-0.5 md:h-1 bg-white/20 rounded-full overflow-hidden">
               <div
                 className="h-full bg-amber-500"
                 style={{ width: '75%' }}
-              ></div>{' '}
+              ></div>
             </div>
           </div>
           <div>
-            <div className="flex justify-between mb-1">
-              {' '}
-              <span>Time in Zone:</span>{' '}
-              <span className="text-amber-400">5:32</span>{' '}
+            <div className="flex justify-between mb-0.5 md:mb-1">
+              <span>Time in Zone:</span>
+              <span className="text-amber-400">5:32</span>
             </div>
-            <div className="h-1 bg-white/20 rounded-full overflow-hidden">
-              {' '}
+            <div className="h-0.5 md:h-1 bg-white/20 rounded-full overflow-hidden">
               <div
                 className="h-full bg-amber-500"
                 style={{ width: '80%' }}
-              ></div>{' '}
+              ></div>
             </div>
           </div>
         </div>
@@ -456,17 +449,16 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   isInView,
 }) => (
   <motion.div
-    className="bg-gradient-to-br from-red-950/30 to-black/50 backdrop-blur-sm p-6 rounded-2xl border border-red-900/30 hover:border-red-700/30 transition-all group" // Original red style
+    className="bg-gradient-to-br from-red-950/30 to-black/50 backdrop-blur-sm p-4 md:p-6 rounded-xl md:rounded-2xl border border-red-900/30 hover:border-red-700/30 transition-all group"
     initial={{ opacity: 0, y: 30 }}
     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
     transition={{ duration: 0.6, delay }}
   >
-    <div className="mb-5 p-3 bg-red-900/20 inline-block rounded-xl group-hover:bg-red-900/30 transition-colors">
-      {' '}
-      {icon}{' '}
+    <div className="mb-3 md:mb-5 p-2.5 md:p-3 bg-red-900/20 inline-block rounded-lg md:rounded-xl group-hover:bg-red-900/30 transition-colors">
+      {icon}
     </div>
-    <h3 className="text-xl font-bold mb-3">{title}</h3>
-    <p className="text-white/70">{description}</p>
+    <h3 className="text-base md:text-xl font-bold mb-1.5 md:mb-3">{title}</h3>
+    <p className="text-sm md:text-base text-white/70">{description}</p>
   </motion.div>
 );
 

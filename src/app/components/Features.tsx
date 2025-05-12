@@ -17,7 +17,7 @@ interface FeatureItemProps {
 
 interface FeaturesProps {
   currentSectionThemeName: ThemeName;
-  isFirstSection?: boolean; // Not used by Features for top, but passed
+  isFirstSection?: boolean;
   isLastSection?: boolean;
 }
 
@@ -32,7 +32,7 @@ const Features: React.FC<FeaturesProps> = ({
 
   return (
     <section
-      className={`py-32 bg-gradient-to-b from-black ${themeDetails.mainBgToColor} relative`} // py-16 instead of py-30 to account for internal padding
+      className={`py-32 bg-gradient-to-b from-black ${themeDetails.mainBgToColor} relative`}
       ref={ref}
     >
       <div className="container mx-auto px-4 md:px-6 relative z-10 pt-20 pb-20">
@@ -59,21 +59,20 @@ const Features: React.FC<FeaturesProps> = ({
             comprehensive coverage.
           </motion.p>
         </div>
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 items-stretch">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            <div className="relative aspect-video rounded-3xl overflow-hidden border border-emerald-900/30">
+            <div className="relative h-[500px] rounded-3xl overflow-hidden border border-emerald-900/30">
               <Image
-                src="/Detection-Image.png" // Ensure this image exists
+                src="/Detection-Image.png"
                 alt="AI Video Analytics Dashboard"
-                width={800}
-                height={600}
-                className="object-cover"
-                priority={false} // only Hero image should be priority
+                layout="fill"
+                objectFit="cover"
+                priority={false}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end">
                 <div className="p-6">
@@ -92,7 +91,7 @@ const Features: React.FC<FeaturesProps> = ({
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8 }}
-            className="space-y-6"
+            className="space-y-6 flex flex-col h-full justify-around"
           >
             <FeatureItem
               title="Advanced Human Detection"
@@ -127,7 +126,17 @@ const Features: React.FC<FeaturesProps> = ({
           </motion.div>
         </div>
       </div>
-
+      {/* Gradient pattern at the bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-60 overflow-hidden pointer-events-none">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `radial-gradient(rgba(${themeDetails.rgb}, 0.3) 1px, transparent 1px)`,
+            backgroundSize: '30px 30px',
+            opacity: 0.4,
+          }}
+        ></div>
+      </div>
       {!isLastSection && (
         <SectionBoundaryEffect
           position="bottom"
@@ -143,8 +152,6 @@ const Features: React.FC<FeaturesProps> = ({
 const FeatureItem: React.FC<FeatureItemProps> = ({ title, description }) => {
   return (
     <div className="border-l-2 border-emerald-500 pl-6 py-2">
-      {' '}
-      {/* Border color could also be dynamic */}
       <h3 className="text-xl font-bold mb-2">{title}</h3>
       <p className="text-white/70">{description}</p>
     </div>

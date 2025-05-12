@@ -76,7 +76,7 @@ const WorkOptimization: React.FC<PageSectionProps> = ({
   currentSectionThemeName,
 }) => {
   const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const isInView = useInView(ref, { once: true, amount: 0.1 }); // Lower amount for mobile responsiveness
   const [activeTab, setActiveTab] = useState<string>('productivity');
 
   const themeDetails = THEME_COLORS_MAP[currentSectionThemeName];
@@ -86,10 +86,10 @@ const WorkOptimization: React.FC<PageSectionProps> = ({
   return (
     <section
       ref={ref}
-      className={`py-20 relative overflow-hidden bg-gradient-to-b ${themeDetails.sectionBgGradient}`}
+      className={`py-16 md:py-20 relative overflow-hidden bg-gradient-to-b ${themeDetails.sectionBgGradient}`}
     >
       {/* Gradient pattern at the top */}
-      <div className="absolute top-0 left-0 right-0 h-60 overflow-hidden pointer-events-none">
+      <div className="absolute top-0 left-0 right-0 h-40 md:h-60 overflow-hidden pointer-events-none">
         <div
           className="absolute inset-0"
           style={{
@@ -175,10 +175,10 @@ const WorkOptimization: React.FC<PageSectionProps> = ({
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto text-center mb-16"
+          className="max-w-3xl mx-auto text-center mb-12 md:mb-16"
         >
           <div
-            className={`inline-flex items-center px-4 py-2 rounded-full mb-6`}
+            className={`inline-flex items-center px-3 py-1.5 md:px-4 md:py-2 rounded-full mb-4 md:mb-6 text-sm md:text-base`}
             style={{
               backgroundColor: `${themeDetails.hex}1A`,
               color: themeDetails.hex,
@@ -188,40 +188,40 @@ const WorkOptimization: React.FC<PageSectionProps> = ({
             Workforce Optimization
           </div>
           <h2
-            className={`text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white ${themeDetails.accentColorClass}`}
+            className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 bg-clip-text text-transparent py-2 bg-gradient-to-r from-white ${themeDetails.accentColorClass}`}
           >
             Maximize Efficiency & Productivity
           </h2>
-          <p className="text-lg text-white/70">
+          <p className="text-base md:text-lg text-white/70">
             Transform your operations with AI-powered workforce analytics that
             identify inefficiencies, optimize workflows, and enhance employee
             productivity across your organization.
           </p>
         </motion.div>
 
-        <div className="flex flex-wrap justify-center gap-4 mb-10">
+        <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 md:mb-10">
           <TabButton
             active={activeTab === 'productivity'}
             onClick={() => setActiveTab('productivity')}
-            icon={<Zap size={18} />}
-            label="Productivity Analysis"
+            icon={<Zap size={16} />}
+            label="Productivity Analytics"
           />
           <TabButton
             active={activeTab === 'workflow'}
             onClick={() => setActiveTab('workflow')}
-            icon={<Users size={18} />}
+            icon={<Users size={16} />}
             label="Workflow Optimization"
           />
           <TabButton
             active={activeTab === 'time'}
             onClick={() => setActiveTab('time')}
-            icon={<Clock size={18} />}
+            icon={<Clock size={16} />}
             label="Time Management"
           />
         </div>
 
         <div
-          className={`bg-black/40 backdrop-blur-md border rounded-2xl overflow-hidden mb-16`}
+          className={`bg-black/40 backdrop-blur-md border rounded-2xl overflow-hidden mb-12 md:mb-16`}
           style={{ borderColor: `${themeDetails.hex}4D` }}
         >
           {activeTab === 'productivity' && (
@@ -231,56 +231,61 @@ const WorkOptimization: React.FC<PageSectionProps> = ({
           {activeTab === 'time' && <TimeManagementTab isInView={isInView} />}
         </div>
 
-        {/* REMOVED max-w-5xl from this div to allow the grid to use more available space */}
         <div className="mx-auto">
           <motion.h3
-            className="text-2xl font-bold mb-8 text-center"
+            className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             Key Benefits
           </motion.h3>
-          {/* The grid itself might need adjustment if the cards become too wide on very large screens */}
-          {/* For now, using lg:grid-cols-3 means they will take 1/3 of the container width on large screens */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             <BenefitCard
-              icon={<TrendingUp className="w-10 h-10 text-blue-400" />}
+              icon={
+                <TrendingUp className="w-8 h-8 md:w-10 md:h-10 text-blue-400" />
+              }
               title="Increase Productivity by 35%"
               description="Identify and eliminate bottlenecks in your workflows to significantly boost overall productivity."
               delay={0.3}
               isInView={isInView}
             />
             <BenefitCard
-              icon={<Clock className="w-10 h-10 text-blue-400" />}
+              icon={<Clock className="w-8 h-8 md:w-10 md:h-10 text-blue-400" />}
               title="Reduce Wasted Time by 42%"
               description="Optimize employee schedules and task allocation based on AI-driven insights."
               delay={0.4}
               isInView={isInView}
             />
             <BenefitCard
-              icon={<Users className="w-10 h-10 text-blue-400" />}
+              icon={<Users className="w-8 h-8 md:w-10 md:h-10 text-blue-400" />}
               title="Improve Employee Satisfaction"
               description="Create more balanced workloads and identify opportunities for skill development."
               delay={0.5}
               isInView={isInView}
             />
             <BenefitCard
-              icon={<BarChart3 className="w-10 h-10 text-blue-400" />}
+              icon={
+                <BarChart3 className="w-8 h-8 md:w-10 md:h-10 text-blue-400" />
+              }
               title="Data-Driven Decision Making"
               description="Make strategic decisions based on comprehensive workforce analytics and trends."
               delay={0.6}
               isInView={isInView}
             />
             <BenefitCard
-              icon={<Briefcase className="w-10 h-10 text-blue-400" />}
+              icon={
+                <Briefcase className="w-8 h-8 md:w-10 md:h-10 text-blue-400" />
+              }
               title="Streamline Core Operations"
               description="Automate repetitive tasks and refine processes for smoother daily operations."
               delay={0.7}
               isInView={isInView}
             />
             <BenefitCard
-              icon={<Target className="w-10 h-10 text-blue-400" />}
+              icon={
+                <Target className="w-8 h-8 md:w-10 md:h-10 text-blue-400" />
+              }
               title="Enhanced Goal Alignment"
               description="Ensure workforce activities directly contribute to key organizational objectives and KPIs."
               delay={0.8}
@@ -290,7 +295,7 @@ const WorkOptimization: React.FC<PageSectionProps> = ({
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-60 overflow-hidden pointer-events-none">
+      <div className="absolute bottom-0 left-0 right-0 h-40 md:h-60 overflow-hidden pointer-events-none">
         <div
           className="absolute inset-0"
           style={{
@@ -304,7 +309,6 @@ const WorkOptimization: React.FC<PageSectionProps> = ({
   );
 };
 
-// ... (TabButton, ProductivityTab, WorkflowTab, TimeManagementTab, MetricCard, EmployeeCard, ProcessItem, ActionItem, OptimizationItem remain unchanged from the previous "reverted" state) ...
 const TabButton: React.FC<TabButtonProps> = ({
   active,
   onClick,
@@ -313,7 +317,7 @@ const TabButton: React.FC<TabButtonProps> = ({
 }) => (
   <button
     onClick={onClick}
-    className={`px-5 py-3 rounded-full flex items-center gap-2 transition-all ${
+    className={`px-3 py-2 md:px-5 md:py-3 rounded-full flex items-center gap-1.5 md:gap-2 transition-all text-xs md:text-sm ${
       active
         ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
         : 'bg-black/30 text-white/70 border border-white/10 hover:bg-black/50'
@@ -328,45 +332,42 @@ const ProductivityTab: React.FC<TabContentProps> = () => {
   const productivityData = [65, 72, 68, 80, 75, 85, 90];
   const industryAvg = [60, 62, 61, 63, 62, 64, 65];
   return (
-    <div className="p-6 md:p-8">
-      <div className="flex flex-col lg:flex-row gap-8">
+    <div className="p-4 md:p-6 lg:p-8">
+      <div className="flex flex-col lg:flex-row gap-6 md:gap-8">
         <div className="lg:w-2/3">
-          <h3 className="text-2xl font-bold mb-6">
-            {' '}
-            Employee Productivity Trends{' '}
+          <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">
+            Employee Productivity Trends
           </h3>
-          <div className="bg-black/30 rounded-xl p-6 mb-6">
-            <div className="flex justify-between items-center mb-4">
-              <h4 className="text-lg font-semibold">
-                {' '}
-                Weekly Productivity Score{' '}
+          <div className="bg-black/30 rounded-xl p-4 md:p-6 mb-6">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4">
+              <h4 className="text-base md:text-lg font-semibold mb-2 sm:mb-0">
+                Weekly Productivity Score
               </h4>
-              <div className="flex items-center text-blue-400 text-sm">
-                <span className="inline-block w-3 h-3 bg-blue-400 rounded-full mr-2"></span>{' '}
+              <div className="flex items-center text-blue-400 text-xs md:text-sm">
+                <span className="inline-block w-2.5 h-2.5 md:w-3 md:h-3 bg-blue-400 rounded-full mr-1.5 md:mr-2"></span>
                 Your Team
-                <span className="inline-block w-3 h-3 bg-white/30 rounded-full ml-4 mr-2"></span>{' '}
+                <span className="inline-block w-2.5 h-2.5 md:w-3 md:h-3 bg-white/30 rounded-full ml-3 md:ml-4 mr-1.5 md:mr-2"></span>
                 Industry Average
               </div>
             </div>
-            <div className="h-64 w-full">
+            <div className="h-56 sm:h-64 w-full">
+              {' '}
+              {/* Adjusted height for mobile */}
               <div className="relative h-full w-full">
                 <div className="absolute inset-0 flex flex-col justify-between">
-                  {' '}
                   {[0, 1, 2, 3, 4].map((_, i) => (
                     <div
                       key={i}
                       className="border-b border-white/10 h-1/5"
                     ></div>
-                  ))}{' '}
+                  ))}
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 h-full flex items-end">
-                  {' '}
                   <svg
                     className="w-full h-full"
-                    viewBox="0 0 700 300"
+                    viewBox="0 0 700 300" // Keep viewBox consistent for scaling
                     preserveAspectRatio="none"
                   >
-                    {' '}
                     <polyline
                       points={industryAvg
                         .map(
@@ -378,8 +379,8 @@ const ProductivityTab: React.FC<TabContentProps> = () => {
                       stroke="rgba(255, 255, 255, 0.3)"
                       strokeWidth="2"
                       strokeDasharray="5,5"
-                    />{' '}
-                  </svg>{' '}
+                    />
+                  </svg>
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 h-full flex items-end">
                   <svg
@@ -388,18 +389,14 @@ const ProductivityTab: React.FC<TabContentProps> = () => {
                     preserveAspectRatio="none"
                   >
                     <linearGradient
-                      id="blueGradient"
+                      id="blueGradientWorkOpt" // Unique ID
                       x1="0%"
                       y1="0%"
                       x2="0%"
                       y2="100%"
                     >
-                      {' '}
-                      <stop
-                        offset="0%"
-                        stopColor="rgba(59, 130, 246, 1)"
-                      />{' '}
-                      <stop offset="100%" stopColor="rgba(59, 130, 246, 0)" />{' '}
+                      <stop offset="0%" stopColor="rgba(59, 130, 246, 1)" />
+                      <stop offset="100%" stopColor="rgba(59, 130, 246, 0)" />
                     </linearGradient>
                     <polyline
                       points={productivityData
@@ -419,23 +416,24 @@ const ProductivityTab: React.FC<TabContentProps> = () => {
                             `${index * 100 + 50},${300 - value * 3}`
                         )
                         .join(' ')} 650,300`}
-                      fill="url(#blueGradient)"
+                      fill="url(#blueGradientWorkOpt)"
                       opacity="0.2"
                     />
                   </svg>
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 flex justify-between px-12 text-xs text-white/60">
-                  {' '}
+                <div className="absolute bottom-0 left-0 right-0 flex justify-around text-xs text-white/60 px-2 sm:px-12">
                   {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(
                     (day, i) => (
-                      <div key={i}>{day}</div>
+                      <div key={i} className="text-center">
+                        {day}
+                      </div>
                     )
-                  )}{' '}
+                  )}
                 </div>
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             <MetricCard
               label="Current Week"
               value="76.4"
@@ -459,9 +457,11 @@ const ProductivityTab: React.FC<TabContentProps> = () => {
             />
           </div>
         </div>
-        <div className="lg:w-1/3">
-          <h3 className="text-2xl font-bold mb-6">Top Performers</h3>
-          <div className="bg-black/30 rounded-xl p-6 space-y-4">
+        <div className="lg:w-1/3 mt-6 lg:mt-0">
+          <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">
+            Top Performers
+          </h3>
+          <div className="bg-black/30 rounded-xl p-4 md:p-6 space-y-3 md:space-y-4">
             <EmployeeCard
               name="Sarah Johnson"
               role="Senior Analyst"
@@ -487,14 +487,9 @@ const ProductivityTab: React.FC<TabContentProps> = () => {
               improvement="+4%"
             />
             <div className="pt-2">
-              {' '}
-              <button className="flex items-center text-blue-400 hover:text-blue-300 transition-colors text-sm">
-                {' '}
-                View all employees <ChevronRight
-                  size={16}
-                  className="ml-1"
-                />{' '}
-              </button>{' '}
+              <button className="flex items-center text-blue-400 hover:text-blue-300 transition-colors text-xs md:text-sm">
+                View all employees <ChevronRight size={14} className="ml-1" />
+              </button>
             </div>
           </div>
         </div>
@@ -505,13 +500,17 @@ const ProductivityTab: React.FC<TabContentProps> = () => {
 
 const WorkflowTab: React.FC<TabContentProps> = () => {
   return (
-    <div className="p-6 md:p-8">
-      <h3 className="text-2xl font-bold mb-6">Workflow Optimization</h3>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div className="p-4 md:p-6 lg:p-8">
+      <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">
+        Workflow Optimization
+      </h3>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
         <div>
-          <div className="bg-black/30 rounded-xl p-6 mb-6">
-            <h4 className="text-lg font-semibold mb-4">Process Efficiency</h4>
-            <div className="space-y-6">
+          <div className="bg-black/30 rounded-xl p-4 md:p-6 mb-6">
+            <h4 className="text-base md:text-lg font-semibold mb-4">
+              Process Efficiency
+            </h4>
+            <div className="space-y-4 md:space-y-6">
               <ProcessItem
                 name="Security Monitoring"
                 efficiency={92}
@@ -538,9 +537,11 @@ const WorkflowTab: React.FC<TabContentProps> = () => {
               />
             </div>
           </div>
-          <div className="bg-black/30 rounded-xl p-6">
-            <h4 className="text-lg font-semibold mb-4">Recommended Actions</h4>
-            <div className="space-y-4">
+          <div className="bg-black/30 rounded-xl p-4 md:p-6">
+            <h4 className="text-base md:text-lg font-semibold mb-4">
+              Recommended Actions
+            </h4>
+            <div className="space-y-3 md:space-y-4">
               <ActionItem
                 title="Streamline Reporting Process"
                 description="Implement automated report generation to reduce manual documentation time by 45%."
@@ -559,224 +560,225 @@ const WorkflowTab: React.FC<TabContentProps> = () => {
             </div>
           </div>
         </div>
-        <div>
-          <div className="bg-black/30 rounded-xl p-6 mb-6">
-            <h4 className="text-lg font-semibold mb-4">
-              {' '}
-              Workflow Visualization{' '}
+        <div className="mt-6 lg:mt-0">
+          <div className="bg-black/30 rounded-xl p-4 md:p-6 mb-6">
+            <h4 className="text-base md:text-lg font-semibold mb-4">
+              Workflow Visualization
             </h4>
             <div className="relative aspect-square rounded-lg overflow-hidden border border-blue-900/30">
-              <div className="absolute inset-0 bg-[url('/placeholder.svg?height=600&width=600')] bg-cover opacity-70"></div>
-              <div className="absolute inset-0 p-4">
+              <div className="absolute inset-0 bg-[url('/placeholder.svg?height=400&width=400')] bg-cover opacity-70"></div>
+              <div className="absolute inset-0 p-2 sm:p-4">
+                {' '}
+                {/* Reduced padding for smaller SVG elements */}
                 <svg width="100%" height="100%" viewBox="0 0 500 500">
+                  {/* Nodes scaled down for mobile */}
                   <circle
                     cx="250"
                     cy="100"
-                    r="30"
+                    r="25"
                     fill="rgba(59, 130, 246, 0.3)"
                     stroke="#3b82f6"
-                    strokeWidth="2"
-                  />{' '}
+                    strokeWidth="1.5"
+                  />
                   <circle
                     cx="150"
                     cy="200"
-                    r="30"
+                    r="25"
                     fill="rgba(59, 130, 246, 0.3)"
                     stroke="#3b82f6"
-                    strokeWidth="2"
-                  />{' '}
+                    strokeWidth="1.5"
+                  />
                   <circle
                     cx="350"
                     cy="200"
-                    r="30"
+                    r="25"
                     fill="rgba(59, 130, 246, 0.3)"
                     stroke="#3b82f6"
-                    strokeWidth="2"
-                  />{' '}
+                    strokeWidth="1.5"
+                  />
                   <circle
                     cx="100"
                     cy="300"
-                    r="30"
+                    r="25"
                     fill="rgba(59, 130, 246, 0.3)"
                     stroke="#3b82f6"
-                    strokeWidth="2"
-                  />{' '}
+                    strokeWidth="1.5"
+                  />
                   <circle
                     cx="200"
                     cy="300"
-                    r="30"
+                    r="25"
                     fill="rgba(59, 130, 246, 0.3)"
                     stroke="#3b82f6"
-                    strokeWidth="2"
-                  />{' '}
+                    strokeWidth="1.5"
+                  />
                   <circle
                     cx="300"
                     cy="300"
-                    r="30"
+                    r="25"
                     fill="rgba(59, 130, 246, 0.3)"
                     stroke="#3b82f6"
-                    strokeWidth="2"
-                  />{' '}
+                    strokeWidth="1.5"
+                  />
                   <circle
                     cx="400"
                     cy="300"
-                    r="30"
+                    r="25"
                     fill="rgba(59, 130, 246, 0.3)"
                     stroke="#3b82f6"
-                    strokeWidth="2"
-                  />{' '}
+                    strokeWidth="1.5"
+                  />
                   <circle
                     cx="250"
                     cy="400"
-                    r="30"
+                    r="25"
                     fill="rgba(59, 130, 246, 0.3)"
                     stroke="#3b82f6"
-                    strokeWidth="2"
+                    strokeWidth="1.5"
+                  />
+                  {/* Lines scaled down */}
+                  <line
+                    x1="250"
+                    y1="125"
+                    x2="150"
+                    y2="175"
+                    stroke="#3b82f6"
+                    strokeWidth="1.5"
                   />
                   <line
                     x1="250"
-                    y1="130"
-                    x2="150"
-                    y2="170"
-                    stroke="#3b82f6"
-                    strokeWidth="2"
-                  />{' '}
-                  <line
-                    x1="250"
-                    y1="130"
+                    y1="125"
                     x2="350"
-                    y2="170"
+                    y2="175"
                     stroke="#3b82f6"
-                    strokeWidth="2"
-                  />{' '}
+                    strokeWidth="1.5"
+                  />
                   <line
                     x1="150"
-                    y1="230"
+                    y1="225"
                     x2="100"
-                    y2="270"
+                    y2="275"
                     stroke="#3b82f6"
-                    strokeWidth="2"
-                  />{' '}
+                    strokeWidth="1.5"
+                  />
                   <line
                     x1="150"
-                    y1="230"
+                    y1="225"
                     x2="200"
-                    y2="270"
+                    y2="275"
                     stroke="#3b82f6"
-                    strokeWidth="2"
-                  />{' '}
+                    strokeWidth="1.5"
+                  />
                   <line
                     x1="350"
-                    y1="230"
+                    y1="225"
                     x2="300"
-                    y2="270"
+                    y2="275"
                     stroke="#3b82f6"
-                    strokeWidth="2"
-                  />{' '}
+                    strokeWidth="1.5"
+                  />
                   <line
                     x1="350"
-                    y1="230"
+                    y1="225"
                     x2="400"
-                    y2="270"
+                    y2="275"
                     stroke="#3b82f6"
-                    strokeWidth="2"
-                  />{' '}
+                    strokeWidth="1.5"
+                  />
                   <line
                     x1="100"
-                    y1="330"
+                    y1="325"
                     x2="250"
-                    y2="370"
+                    y2="375"
                     stroke="#3b82f6"
-                    strokeWidth="2"
-                    strokeDasharray="5,5"
-                  />{' '}
+                    strokeWidth="1.5"
+                    strokeDasharray="4,4"
+                  />
                   <line
                     x1="200"
-                    y1="330"
+                    y1="325"
                     x2="250"
-                    y2="370"
+                    y2="375"
                     stroke="#3b82f6"
-                    strokeWidth="2"
-                  />{' '}
+                    strokeWidth="1.5"
+                  />
                   <line
                     x1="300"
-                    y1="330"
+                    y1="325"
                     x2="250"
-                    y2="370"
+                    y2="375"
                     stroke="#3b82f6"
-                    strokeWidth="2"
-                  />{' '}
+                    strokeWidth="1.5"
+                  />
                   <line
                     x1="400"
-                    y1="330"
+                    y1="325"
                     x2="250"
-                    y2="370"
+                    y2="375"
                     stroke="#3b82f6"
-                    strokeWidth="2"
-                    strokeDasharray="5,5"
+                    strokeWidth="1.5"
+                    strokeDasharray="4,4"
                   />
+                  {/* Bottleneck indicators scaled down */}
                   <circle
                     cx="100"
                     cy="300"
-                    r="35"
+                    r="30"
                     fill="none"
                     stroke="#ef4444"
-                    strokeWidth="2"
-                    strokeDasharray="5,5"
-                  />{' '}
+                    strokeWidth="1.5"
+                    strokeDasharray="4,4"
+                  />
                   <circle
                     cx="400"
                     cy="300"
-                    r="35"
+                    r="30"
                     fill="none"
                     stroke="#ef4444"
-                    strokeWidth="2"
-                    strokeDasharray="5,5"
+                    strokeWidth="1.5"
+                    strokeDasharray="4,4"
                   />
                 </svg>
               </div>
-              <div className="absolute bottom-4 right-4 bg-black/80 p-3 rounded-lg">
-                {' '}
-                <div className="flex items-center space-x-4 text-xs">
-                  {' '}
+              <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 bg-black/80 p-1.5 md:p-3 rounded-md md:rounded-lg">
+                <div className="flex items-center space-x-2 md:space-x-4 text-xs">
                   <div className="flex items-center">
-                    {' '}
-                    <div className="w-3 h-3 rounded-full bg-blue-500/70 mr-2"></div>{' '}
-                    <span>Process Node</span>{' '}
-                  </div>{' '}
+                    <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-blue-500/70 mr-1 md:mr-2"></div>
+                    <span className="hidden sm:inline">Process Node</span>
+                    <span className="sm:hidden">Node</span>
+                  </div>
                   <div className="flex items-center">
-                    {' '}
-                    <div className="w-3 h-3 rounded-full border border-red-500 mr-2"></div>{' '}
-                    <span>Bottleneck</span>{' '}
-                  </div>{' '}
-                </div>{' '}
+                    <div className="w-2 h-2 md:w-3 md:h-3 rounded-full border border-red-500 mr-1 md:mr-2"></div>
+                    <span className="hidden sm:inline">Bottleneck</span>
+                    <span className="sm:hidden">Issue</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div className="bg-black/30 rounded-xl p-6">
-            <h4 className="text-lg font-semibold mb-4">Optimization Impact</h4>
-            <div className="space-y-4">
+          <div className="bg-black/30 rounded-xl p-4 md:p-6">
+            <h4 className="text-base md:text-lg font-semibold mb-4">
+              Optimization Impact
+            </h4>
+            <div className="space-y-3 md:space-y-4">
               {[
-                { label: 'Productivity Increase', value: 32 },
+                { label: 'Productivity', value: 32 }, // Shorter label
                 { label: 'Cost Reduction', value: 28 },
-                { label: 'Response Time Improvement', value: 45 },
+                { label: 'Response Time', value: 45 }, // Shorter label
               ].map((item) => (
                 <div key={item.label}>
-                  {' '}
                   <div className="flex justify-between items-center mb-1">
-                    {' '}
-                    <span className="text-sm">{item.label}</span>{' '}
-                    <span className="text-sm text-blue-400">
+                    <span className="text-xs md:text-sm">{item.label}</span>
+                    <span className="text-xs md:text-sm text-blue-400">
                       +{item.value}%
-                    </span>{' '}
-                  </div>{' '}
-                  <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                    {' '}
+                    </span>
+                  </div>
+                  <div className="h-1.5 md:h-2 bg-white/10 rounded-full overflow-hidden">
                     <div
                       className="h-full bg-blue-500"
                       style={{ width: `${item.value}%` }}
-                    ></div>{' '}
-                  </div>{' '}
+                    ></div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -789,18 +791,23 @@ const WorkflowTab: React.FC<TabContentProps> = () => {
 
 const TimeManagementTab: React.FC<TabContentProps> = () => {
   return (
-    <div className="p-6 md:p-8">
-      <h3 className="text-2xl font-bold mb-6">Time Management Analysis</h3>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div className="p-4 md:p-6 lg:p-8">
+      <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">
+        Time Management Analysis
+      </h3>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
         <div className="lg:col-span-2">
-          <div className="bg-black/30 rounded-xl p-6 mb-6">
-            <h4 className="text-lg font-semibold mb-4">
-              {' '}
-              Time Allocation by Activity{' '}
+          <div className="bg-black/30 rounded-xl p-4 md:p-6 mb-6">
+            <h4 className="text-base md:text-lg font-semibold mb-4">
+              Time Allocation by Activity
             </h4>
-            <div className="relative aspect-video">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <svg width="300" height="300" viewBox="0 0 100 100">
+            {/* Refined chart and legend layout */}
+            <div className="flex flex-col md:relative md:h-[300px] items-center">
+              {' '}
+              {/* md:h-[300px] or md:aspect-video depending on desired md+ height */}
+              {/* Chart container */}
+              <div className="w-[180px] h-[180px] sm:w-[200px] sm:h-[200px] md:w-[250px] md:h-[250px] lg:w-[300px] lg:h-[300px] md:absolute md:left-0 md:top-1/2 md:transform md:-translate-y-1/2">
+                <svg width="100%" height="100%" viewBox="0 0 100 100">
                   <circle
                     cx="50"
                     cy="50"
@@ -810,7 +817,7 @@ const TimeManagementTab: React.FC<TabContentProps> = () => {
                     strokeWidth="10"
                     strokeDasharray="70.7 282.7"
                     strokeDashoffset="0"
-                  />{' '}
+                  />
                   <circle
                     cx="50"
                     cy="50"
@@ -820,7 +827,7 @@ const TimeManagementTab: React.FC<TabContentProps> = () => {
                     strokeWidth="10"
                     strokeDasharray="56.5 282.7"
                     strokeDashoffset="-70.7"
-                  />{' '}
+                  />
                   <circle
                     cx="50"
                     cy="50"
@@ -830,7 +837,7 @@ const TimeManagementTab: React.FC<TabContentProps> = () => {
                     strokeWidth="10"
                     strokeDasharray="42.4 282.7"
                     strokeDashoffset="-127.2"
-                  />{' '}
+                  />
                   <circle
                     cx="50"
                     cy="50"
@@ -841,79 +848,92 @@ const TimeManagementTab: React.FC<TabContentProps> = () => {
                     strokeDasharray="28.3 282.7"
                     strokeDashoffset="-169.6"
                   />
-                  <circle cx="50" cy="50" r="35" fill="black" />{' '}
+                  <circle cx="50" cy="50" r="35" fill="black" />
                   <text
                     x="50"
                     y="50"
                     textAnchor="middle"
                     dominantBaseline="middle"
                     fill="white"
-                    fontSize="10"
+                    fontSize="8"
+                    className="sm:text-[9px] md:text-[10px]"
                   >
                     {' '}
                     Time Usage{' '}
                   </text>
                 </svg>
               </div>
-              <div className="absolute right-0 top-1/2 transform -translate-y-1/2 space-y-4">
-                <div className="flex items-center">
-                  {' '}
-                  <div className="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>{' '}
-                  <span>Core Security Tasks (35%)</span>{' '}
-                </div>{' '}
-                <div className="flex items-center">
-                  {' '}
-                  <div className="w-3 h-3 rounded-full bg-emerald-500 mr-2"></div>{' '}
-                  <span>Monitoring & Analysis (28%)</span>{' '}
-                </div>{' '}
-                <div className="flex items-center">
-                  {' '}
-                  <div className="w-3 h-3 rounded-full bg-amber-500 mr-2"></div>{' '}
-                  <span>Reporting & Documentation (21%)</span>{' '}
-                </div>{' '}
-                <div className="flex items-center">
-                  {' '}
-                  <div className="w-3 h-3 rounded-full bg-red-500 mr-2"></div>{' '}
-                  <span>Administrative Tasks (16%)</span>{' '}
-                </div>
+              {/* Legend positioning: below chart on mobile, to the side on md+ */}
+              <div className="flex flex-wrap justify-center md:justify-start gap-x-3 sm:gap-x-4 gap-y-1.5 sm:gap-y-2 mt-4 md:absolute md:right-0 md:top-1/2 md:transform md:-translate-y-1/2 md:space-y-2 lg:space-y-3 xl:space-y-4 md:flex-col md:gap-0 md:mt-0">
+                {[
+                  {
+                    color: 'bg-blue-500',
+                    label: 'Core Tasks (35%)',
+                    short: 'Core (35%)',
+                  },
+                  {
+                    color: 'bg-emerald-500',
+                    label: 'Monitoring (28%)',
+                    short: 'Monitor (28%)',
+                  },
+                  {
+                    color: 'bg-amber-500',
+                    label: 'Reporting (21%)',
+                    short: 'Report (21%)',
+                  },
+                  {
+                    color: 'bg-red-500',
+                    label: 'Admin Tasks (16%)',
+                    short: 'Admin (16%)',
+                  },
+                ].map((item) => (
+                  <div
+                    key={item.label}
+                    className="flex items-center text-xs md:text-sm"
+                  >
+                    <div
+                      className={`w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 rounded-full ${item.color} mr-1 sm:mr-1.5 md:mr-2`}
+                    ></div>
+                    <span className="hidden sm:inline">{item.label}</span>
+                    <span className="sm:hidden">{item.short}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-          <div className="bg-black/30 rounded-xl p-6">
-            <h4 className="text-lg font-semibold mb-4">
-              {' '}
-              Time Optimization Opportunities{' '}
+          <div className="bg-black/30 rounded-xl p-4 md:p-6">
+            <h4 className="text-base md:text-lg font-semibold mb-4">
+              Time Optimization Opportunities
             </h4>
-            <div className="space-y-4">
+            <div className="space-y-3 md:space-y-4">
               <OptimizationItem
-                title="Automate Routine Documentation"
+                title="Automate Routine Docs"
                 description="Implement AI-assisted report generation to reduce documentation time by 65%."
-                timeImpact="12.5 hours/week"
+                timeImpact="12.5h/wk"
                 priority="High"
               />
               <OptimizationItem
-                title="Streamline Handover Process"
+                title="Streamline Handovers"
                 description="Standardize shift handover protocols to reduce transition time and information loss."
-                timeImpact="4.2 hours/week"
+                timeImpact="4.2h/wk"
                 priority="Medium"
               />
               <OptimizationItem
-                title="Optimize Meeting Structure"
-                description="Implement focused 15-minute daily briefings instead of hour-long meetings."
-                timeImpact="6.8 hours/week"
+                title="Optimize Meetings"
+                description="Implement focused 15-min daily briefings instead of hour-long meetings."
+                timeImpact="6.8h/wk"
                 priority="High"
               />
             </div>
           </div>
         </div>
-        <div>
-          <div className="bg-black/30 rounded-xl p-6 mb-6">
-            <h4 className="text-lg font-semibold mb-4">
-              {' '}
-              Time Efficiency Score{' '}
+        <div className="mt-6 lg:mt-0">
+          <div className="bg-black/30 rounded-xl p-4 md:p-6 mb-6">
+            <h4 className="text-base md:text-lg font-semibold mb-4">
+              Time Efficiency Score
             </h4>
             <div className="flex flex-col items-center">
-              <div className="relative w-48 h-48">
+              <div className="relative w-36 h-36 md:w-48 md:h-48">
                 <svg className="w-full h-full" viewBox="0 0 100 100">
                   <circle
                     cx="50"
@@ -921,89 +941,87 @@ const TimeManagementTab: React.FC<TabContentProps> = () => {
                     r="45"
                     fill="transparent"
                     stroke="#1e293b"
-                    strokeWidth="10"
-                  />{' '}
+                    strokeWidth="8"
+                  />
                   <circle
                     cx="50"
                     cy="50"
                     r="45"
                     fill="transparent"
                     stroke="#3b82f6"
-                    strokeWidth="10"
+                    strokeWidth="8"
                     strokeDasharray="282.7"
                     strokeDashoffset="84.8"
                     transform="rotate(-90 50 50)"
                   />
                   <text
                     x="50"
-                    y="45"
+                    y="48"
                     textAnchor="middle"
                     fill="white"
-                    fontSize="20"
+                    fontSize="16"
                     fontWeight="bold"
+                    className="md:text-[20px]"
                   >
                     {' '}
                     70%{' '}
-                  </text>{' '}
+                  </text>
                   <text
                     x="50"
-                    y="65"
+                    y="62"
                     textAnchor="middle"
                     fill="#3b82f6"
-                    fontSize="10"
+                    fontSize="8"
+                    className="md:text-[10px]"
                   >
                     {' '}
                     Efficiency{' '}
                   </text>
                 </svg>
               </div>
-              <div className="mt-6 text-center">
-                {' '}
-                <p className="text-white/70 mb-2">
-                  {' '}
+              <div className="mt-4 md:mt-6 text-center">
+                <p className="text-white/70 mb-1 md:mb-2 text-sm md:text-base">
                   Current efficiency rating is{' '}
-                  <span className="text-blue-400 font-semibold">Good</span>{' '}
-                </p>{' '}
-                <p className="text-white/70 text-sm">
-                  {' '}
+                  <span className="text-blue-400 font-semibold">Good</span>
+                </p>
+                <p className="text-white/70 text-xs md:text-sm">
                   Potential to reach{' '}
                   <span className="text-blue-400 font-semibold">92%</span> with
-                  recommended optimizations{' '}
-                </p>{' '}
+                  optimizations
+                </p>
               </div>
             </div>
           </div>
-          <div className="bg-black/30 rounded-xl p-6">
-            <h4 className="text-lg font-semibold mb-4">Weekly Time Savings</h4>
-            <div className="space-y-4">
+          <div className="bg-black/30 rounded-xl p-4 md:p-6">
+            <h4 className="text-base md:text-lg font-semibold mb-4">
+              Weekly Time Savings
+            </h4>
+            <div className="space-y-3 md:space-y-4">
               {[
                 { label: 'Current', value: 0, width: 0 },
-                { label: 'After Phase 1', value: 12.5, width: 30 },
-                { label: 'After Phase 2', value: 23.5, width: 60 },
-                { label: 'Full Implementation', value: 38.2, width: 100 },
+                { label: 'Phase 1', value: 12.5, width: 30 },
+                { label: 'Phase 2', value: 23.5, width: 60 },
+                { label: 'Full Opt.', value: 38.2, width: 100 },
               ].map((item) => (
                 <div key={item.label}>
-                  {' '}
                   <div className="flex justify-between items-center mb-1">
-                    {' '}
-                    <span className="text-sm">{item.label}</span>{' '}
+                    <span className="text-xs md:text-sm">{item.label}</span>
                     <span
-                      className={`text-sm ${
+                      className={`text-xs md:text-sm ${
                         item.value > 0 ? 'text-blue-400' : 'text-white/70'
                       }`}
                     >
-                      {item.value} hours
-                    </span>{' '}
-                  </div>{' '}
-                  <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                    {' '}
+                      {item.value} hrs
+                    </span>
+                  </div>
+                  <div className="h-1.5 md:h-2 bg-white/10 rounded-full overflow-hidden">
                     <div
                       className={`h-full ${
                         item.value > 0 ? 'bg-blue-500' : 'bg-transparent'
                       }`}
                       style={{ width: `${item.width}%` }}
-                    ></div>{' '}
-                  </div>{' '}
+                    ></div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -1021,22 +1039,20 @@ const MetricCard: React.FC<MetricCardProps> = ({
   trend,
   trendUp,
 }) => (
-  <div className="bg-black/30 rounded-xl p-4 border border-blue-900/30 hover:border-blue-700/50 transition-all">
-    <p className="text-white/60 text-sm mb-2">{label}</p>
+  <div className="bg-black/30 rounded-xl p-3 md:p-4 border border-blue-900/30 hover:border-blue-700/50 transition-all">
+    <p className="text-white/60 text-xs md:text-sm mb-1 md:mb-2">{label}</p>
     <div className="flex items-end justify-between">
-      <h3 className="text-2xl font-bold">
-        {' '}
+      <h3 className="text-xl md:text-2xl font-bold">
         {value}
-        <span className="text-lg">{unit}</span>{' '}
+        <span className="text-sm md:text-lg">{unit}</span>
       </h3>
       <span
         className={`text-xs ${
           trendUp ? 'text-blue-400' : 'text-amber-400'
         } flex items-center`}
       >
-        {' '}
         {trend} {trendUp && <span className="ml-1">▲</span>}{' '}
-        {!trendUp && <span className="ml-1">▼</span>}{' '}
+        {!trendUp && <span className="ml-1">▼</span>}
       </span>
     </div>
   </div>
@@ -1048,20 +1064,17 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
   score,
   improvement,
 }) => (
-  <div className="flex items-center justify-between p-3 border border-blue-900/20 rounded-lg hover:bg-blue-900/10 transition-all">
+  <div className="flex items-center justify-between p-2.5 md:p-3 border border-blue-900/20 rounded-lg hover:bg-blue-900/10 transition-all">
     <div>
-      {' '}
-      <h4 className="font-medium">{name}</h4>{' '}
-      <p className="text-white/60 text-sm">{role}</p>{' '}
+      <h4 className="font-medium text-sm md:text-base">{name}</h4>
+      <p className="text-white/60 text-xs md:text-sm">{role}</p>
     </div>
     <div className="text-right">
-      {' '}
-      <div className="text-xl font-bold">
-        {' '}
+      <div className="text-lg md:text-xl font-bold">
         {score}
-        <span className="text-sm text-white/60">%</span>{' '}
-      </div>{' '}
-      <div className="text-xs text-blue-400">{improvement}</div>{' '}
+        <span className="text-xs md:text-sm text-white/60">%</span>
+      </div>
+      <div className="text-xs text-blue-400">{improvement}</div>
     </div>
   </div>
 );
@@ -1088,23 +1101,25 @@ const ProcessItem: React.FC<ProcessItemProps> = ({
   };
   return (
     <div>
-      <div className="flex justify-between items-center mb-2">
-        {' '}
-        <h5 className="font-medium">{name}</h5>{' '}
-        <span className={`px-2 py-1 rounded text-xs ${getStatusColor(status)}`}>
-          {' '}
-          {status}{' '}
-        </span>{' '}
+      <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-2">
+        <h5 className="font-medium text-sm md:text-base mb-1 sm:mb-0">
+          {name}
+        </h5>
+        <span
+          className={`px-1.5 py-0.5 md:px-2 md:py-1 rounded text-xs ${getStatusColor(
+            status
+          )}`}
+        >
+          {status}
+        </span>
       </div>
-      <div className="grid grid-cols-2 gap-4 mb-2">
+      <div className="grid grid-cols-2 gap-2 md:gap-4 mb-2">
         <div>
           <div className="flex justify-between items-center mb-1">
-            {' '}
-            <span className="text-xs text-white/60">Efficiency</span>{' '}
-            <span className="text-xs">{efficiency}%</span>{' '}
+            <span className="text-xs text-white/60">Efficiency</span>
+            <span className="text-xs">{efficiency}%</span>
           </div>
-          <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
-            {' '}
+          <div className="h-1 md:h-1.5 bg-white/10 rounded-full overflow-hidden">
             <div
               className={`h-full ${
                 efficiency > 85
@@ -1116,17 +1131,15 @@ const ProcessItem: React.FC<ProcessItemProps> = ({
                   : 'bg-red-500'
               }`}
               style={{ width: `${efficiency}%` }}
-            ></div>{' '}
+            ></div>
           </div>
         </div>
         <div>
           <div className="flex justify-between items-center mb-1">
-            {' '}
-            <span className="text-xs text-white/60">Bottlenecks</span>{' '}
-            <span className="text-xs">{bottlenecks}</span>{' '}
+            <span className="text-xs text-white/60">Bottlenecks</span>
+            <span className="text-xs">{bottlenecks}</span>
           </div>
-          <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
-            {' '}
+          <div className="h-1 md:h-1.5 bg-white/10 rounded-full overflow-hidden">
             <div
               className={`h-full ${
                 bottlenecks < 2
@@ -1138,7 +1151,7 @@ const ProcessItem: React.FC<ProcessItemProps> = ({
                   : 'bg-red-500'
               }`}
               style={{ width: `${(bottlenecks / 5) * 100}%` }}
-            ></div>{' '}
+            ></div>
           </div>
         </div>
       </div>
@@ -1164,16 +1177,20 @@ const ActionItem: React.FC<ActionItemProps> = ({
     }
   };
   return (
-    <div className="border border-blue-900/20 rounded-lg p-3 hover:bg-blue-900/10 transition-all">
-      <div className="flex justify-between items-start mb-2">
-        {' '}
-        <h5 className="font-medium">{title}</h5>{' '}
-        <span className={`px-2 py-1 rounded text-xs ${getImpactColor(impact)}`}>
-          {' '}
-          {impact} Impact{' '}
-        </span>{' '}
+    <div className="border border-blue-900/20 rounded-lg p-2.5 md:p-3 hover:bg-blue-900/10 transition-all">
+      <div className="flex flex-col sm:flex-row justify-between sm:items-start mb-1.5 md:mb-2">
+        <h5 className="font-medium text-sm md:text-base mb-1 sm:mb-0">
+          {title}
+        </h5>
+        <span
+          className={`px-1.5 py-0.5 md:px-2 md:py-1 rounded text-xs whitespace-nowrap ${getImpactColor(
+            impact
+          )}`}
+        >
+          {impact} Impact
+        </span>
       </div>
-      <p className="text-sm text-white/70">{description}</p>
+      <p className="text-xs md:text-sm text-white/70">{description}</p>
     </div>
   );
 };
@@ -1197,27 +1214,30 @@ const OptimizationItem: React.FC<OptimizationItemProps> = ({
     }
   };
   return (
-    <div className="border border-blue-900/20 rounded-lg p-3 hover:bg-blue-900/10 transition-all">
-      <div className="flex justify-between items-start mb-2">
-        {' '}
-        <h5 className="font-medium">{title}</h5>{' '}
+    <div className="border border-blue-900/20 rounded-lg p-2.5 md:p-3 hover:bg-blue-900/10 transition-all">
+      <div className="flex flex-col sm:flex-row justify-between sm:items-start mb-1.5 md:mb-2">
+        <h5 className="font-medium text-sm md:text-base mb-1 sm:mb-0">
+          {title}
+        </h5>
         <span
-          className={`px-2 py-1 rounded text-xs ${getPriorityColor(priority)}`}
+          className={`px-1.5 py-0.5 md:px-2 md:py-1 rounded text-xs whitespace-nowrap ${getPriorityColor(
+            priority
+          )}`}
         >
-          {' '}
-          {priority} Priority{' '}
-        </span>{' '}
+          {priority} Priority
+        </span>
       </div>
-      <p className="text-sm text-white/70 mb-2">{description}</p>
-      <div className="flex items-center text-blue-400 text-sm">
-        {' '}
-        <Clock size={14} className="mr-1" /> <span>Saves {timeImpact}</span>{' '}
+      <p className="text-xs md:text-sm text-white/70 mb-1.5 md:mb-2">
+        {description}
+      </p>
+      <div className="flex items-center text-blue-400 text-xs md:text-sm">
+        <Clock size={12} className="mr-1 md:size-14" />{' '}
+        <span>Saves {timeImpact}</span>
       </div>
     </div>
   );
 };
 
-// BenefitCard is updated to match red/purple card styles
 const BenefitCard: React.FC<BenefitCardProps> = ({
   icon,
   title,
@@ -1226,16 +1246,16 @@ const BenefitCard: React.FC<BenefitCardProps> = ({
   isInView,
 }) => (
   <motion.div
-    className="bg-gradient-to-br from-blue-950/30 to-black/50 backdrop-blur-sm p-6 rounded-2xl border border-blue-900/30 hover:border-blue-700/30 transition-all group"
+    className="bg-gradient-to-br from-blue-950/30 to-black/50 backdrop-blur-sm p-4 md:p-6 rounded-xl md:rounded-2xl border border-blue-900/30 hover:border-blue-700/30 transition-all group"
     initial={{ opacity: 0, y: 20 }}
     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
     transition={{ duration: 0.5, delay }}
   >
-    <div className="mb-5 p-3 bg-blue-900/20 inline-block rounded-xl group-hover:bg-blue-900/30 transition-colors">
+    <div className="mb-3 md:mb-5 p-2.5 md:p-3 bg-blue-900/20 inline-block rounded-lg md:rounded-xl group-hover:bg-blue-900/30 transition-colors">
       {icon}
     </div>
-    <h3 className="text-xl font-bold mb-3">{title}</h3>
-    <p className="text-white/70">{description}</p>
+    <h3 className="text-base md:text-xl font-bold mb-1.5 md:mb-3">{title}</h3>
+    <p className="text-sm md:text-base text-white/70">{description}</p>
   </motion.div>
 );
 

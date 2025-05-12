@@ -109,7 +109,7 @@ const CTA: React.FC<PageSectionProps> = ({ currentSectionThemeName }) => {
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <motion.h2
-            className={`text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white ${themeDetails.accentColorClass}`}
+            className={`text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent py-2 bg-gradient-to-r from-white ${themeDetails.accentColorClass}`}
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6 }}
