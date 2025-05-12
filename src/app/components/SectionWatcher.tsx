@@ -1,3 +1,4 @@
+// FILE: src/app/components/SectionWatcher.tsx
 'use client';
 
 import React, { useRef, useEffect, ReactNode, RefObject } from 'react';
@@ -11,6 +12,7 @@ interface SectionWatcherProps {
   themeName: ThemeName;
   order: number;
   previousSectionThemeName?: ThemeName | null;
+  noTopBoundary?: boolean;
 }
 
 const SectionWatcher: React.FC<SectionWatcherProps> = ({
@@ -19,6 +21,7 @@ const SectionWatcher: React.FC<SectionWatcherProps> = ({
   themeName,
   order,
   previousSectionThemeName,
+  noTopBoundary,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { registerSection, unregisterSection } = useSectionTheme();
@@ -41,23 +44,24 @@ const SectionWatcher: React.FC<SectionWatcherProps> = ({
     ? THEME_COLORS_MAP[previousSectionThemeName]
     : null;
 
-  // The top boundary effect for a section should visually blend from the overall page background (black)
-  // or the specific main background of the section if that makes more sense.
-  // For most cases, 'black/90' is a good default for the overlaySourceColorCss of a top boundary.
-  // CTA.tsx had a specific `from-gray-900/90` for its top boundary, which matches its own `mainBgToColor`.
-  // Let's assume top boundaries fade from black, unless specified otherwise by section specific logic.
-  const topOverlaySource =
-    THEME_COLORS_MAP[themeName]?.mainBgToColor.replace('to-', 'black/') ||
-    'black/90';
+  // Determine the source color for the top overlay.
+  // It should generally fade from black unless the section itself starts with a different color.
+  // Here, 'themeName' refers to the CURRENT section's theme.
+  // 'prevThemeColors' refers to the PREVIOUS section's theme.
+  // The TOP boundary uses the PREVIOUS section's colors for the patterns,
+  // but the overlaySourceColorCss should define what it's fading FROM at the very top.
+  // Let's simplify this to always fade from black for the top boundary overlay for now.
+  const topOverlaySourceColor = 'black/90'; // Or you could use: THEME_COLORS_MAP[themeName]?.mainBgToColor.split('-')[0] + "/90" if you want it based on current section base color
 
   return (
     <div ref={ref} className="relative">
-      {prevThemeColors && order > 1 && (
+      {/* Conditionally render top SectionBoundaryEffect */}
+      {prevThemeColors && order > 1 && !noTopBoundary && (
         <SectionBoundaryEffect
           position="top"
-          themeColorRGB={prevThemeColors.rgb}
-          themeColorHex={prevThemeColors.hex}
-          overlaySourceColorCss={topOverlaySource} // Fades from black for top of section
+          themeColorRGB={prevThemeColors.rgb} // Uses PREVIOUS section's theme for pattern colors
+          themeColorHex={prevThemeColors.hex} // Uses PREVIOUS section's theme for pattern colors
+          overlaySourceColorCss={topOverlaySourceColor} // Defines the 'from-' color of the gradient overlay
         />
       )}
       {children}

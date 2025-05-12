@@ -1,4 +1,5 @@
-import Hero from './components/Hero';
+// FILE: src/app/page.tsx
+import Hero from './components/Hero'; // Your original Hero.tsx
 import Features from './components/Features';
 import CTA from './components/CTA';
 import ThreatDetection from './components/ThreatDetection';
@@ -16,7 +17,12 @@ export interface ComponentProps {
 export default function Home() {
   const sectionDeclarations = [
     { id: 'hero', Comp: Hero, theme: 'emerald' as ThemeName },
-    { id: 'features', Comp: Features, theme: 'emerald' as ThemeName },
+    {
+      id: 'features',
+      Comp: Features,
+      theme: 'emerald' as ThemeName,
+      noTopBoundary: true,
+    }, // noTopBoundary is set
     {
       id: 'work-optimization',
       Comp: WorkOptimization,
@@ -37,8 +43,9 @@ export default function Home() {
 
   return (
     <div className="overflow-hidden">
-      {sectionDeclarations.map((section, index) => {
-        const { Comp, id, theme } = section;
+      {sectionDeclarations.map((sectionData, index) => {
+        // Renamed 'section' to 'sectionData' to avoid conflict
+        const { Comp, id, theme } = sectionData;
         const previousThemeName =
           index > 0 ? sectionDeclarations[index - 1].theme : null;
         const isLastSection = index === sectionDeclarations.length - 1;
@@ -57,6 +64,9 @@ export default function Home() {
             themeName={theme}
             order={index + 1}
             previousSectionThemeName={previousThemeName}
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            noTopBoundary={sectionData.noTopBoundary} // Pass the new prop
           >
             <Comp {...componentProps} />
           </SectionWatcher>
