@@ -24,10 +24,11 @@ const Hero = () => {
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter mb-6 leading-tight">
-            Transform Your Operations with AI-Powered Video Intelligence.
+            Transform Your Operations with AI-Powered Video Intelligence
           </h1>
           <p className="text-xl md:text-2xl text-white/80 mb-8">
-            Secure • Optimize • Innovate
+            Custom tailored solutions. Real-time insights. Enhanced safety and
+            efficiency.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
