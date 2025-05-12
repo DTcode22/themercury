@@ -6,9 +6,9 @@ import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import {
   AlertTriangle,
-  PenIcon as Gun, // Using PenIcon as placeholder, consider replacing with a more appropriate icon
+  ShieldAlert,
   Flame,
-  Skull,
+  ScanSearch,
   Shield,
   Eye,
 } from 'lucide-react';
@@ -35,7 +35,7 @@ const ThreatDetection: React.FC<PageSectionProps> = ({
   currentSectionThemeName,
 }) => {
   const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 }); // Lower amount for mobile
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
   const [activeDemo, setActiveDemo] = useState<string>('firearm');
 
   const themeDetails = THEME_COLORS_MAP[currentSectionThemeName];
@@ -158,11 +158,10 @@ const ThreatDetection: React.FC<PageSectionProps> = ({
           </p>
         </motion.div>
 
-        {/* Threat Detection Demo - Stacks on mobile, buttons first */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16 lg:items-stretch">
           <div className="lg:col-span-2 order-2 lg:order-1">
             <div
-              className="relative aspect-video rounded-xl md:rounded-2xl overflow-hidden border" // smaller radius on mobile
+              className="relative aspect-video rounded-xl md:rounded-2xl overflow-hidden border h-full"
               style={{ borderColor: `${themeDetails.hex}4D` }}
             >
               {activeDemo === 'firearm' && <FirearmDetectionDemo />}
@@ -170,25 +169,26 @@ const ThreatDetection: React.FC<PageSectionProps> = ({
               {activeDemo === 'behavior' && <SuspiciousBehaviorDemo />}
             </div>
           </div>
-          <div className="order-1 lg:order-2 flex flex-col space-y-3 md:space-y-4">
+          {/* Changed space-y-4 to space-y-2 for a slighter gap */}
+          <div className="order-1 lg:order-2 flex flex-col space-y-2 lg:h-full lg:justify-start lg:pl-4">
             <ThreatDemoButton
               active={activeDemo === 'firearm'}
               onClick={() => setActiveDemo('firearm')}
-              icon={<Gun size={18} className="md:size-20" />}
+              icon={<ShieldAlert size={24} />}
               title="Firearm Detection"
               description="Instantly identify weapons with high accuracy"
             />
             <ThreatDemoButton
               active={activeDemo === 'fire'}
               onClick={() => setActiveDemo('fire')}
-              icon={<Flame size={18} className="md:size-20" />}
+              icon={<Flame size={24} />}
               title="Fire & Hazard Detection"
               description="Early warning system for fire and smoke"
             />
             <ThreatDemoButton
               active={activeDemo === 'behavior'}
               onClick={() => setActiveDemo('behavior')}
-              icon={<Skull size={18} className="md:size-20" />}
+              icon={<ScanSearch size={24} />}
               title="Suspicious Behavior"
               description="Identify unusual patterns and activities"
             />
@@ -245,31 +245,36 @@ const ThreatDemoButton: React.FC<ThreatDemoButtonProps> = ({
 }) => (
   <button
     onClick={onClick}
-    className={`p-3 md:p-4 rounded-lg md:rounded-xl text-left transition-all ${
+    className={`p-4 rounded-xl text-left group w-full ${
       active
         ? 'bg-gradient-to-r from-red-950 to-red-900/50 border border-red-500/30'
-        : 'bg-black/30 border border-white/10 hover:bg-black/50'
+        : 'bg-black/30 border border-white/10 hover:bg-black/40 hover:border-white/15 transition-colors duration-100 ease-out'
     }`}
   >
-    <div className="flex items-start">
-      <div
-        className={`p-1.5 md:p-2 rounded-md md:rounded-lg ${
-          active ? 'bg-red-500/20 text-red-400' : 'bg-white/10 text-white/70'
-        }`}
+    <div className="flex items-start gap-x-3 md:gap-x-4">
+      <span
+        className={`
+        flex-shrink-0 
+        p-2.5
+        rounded-lg
+        ${
+          active
+            ? 'bg-red-800/40 text-red-300'
+            : 'bg-white/10 text-white/70 group-hover:bg-white/15 group-hover:text-red-400 transition-colors duration-100 ease-out'
+        }
+      `}
       >
         {icon}
-      </div>
-      <div className="ml-2.5 md:ml-4">
+      </span>
+      <div className="flex-grow pt-0.5">
         <h3
-          className={`font-bold text-sm md:text-base ${
-            active ? 'text-red-400' : 'text-white'
+          className={`font-semibold text-base ${
+            active ? 'text-red-200' : 'text-white'
           }`}
         >
           {title}
         </h3>
-        <p className="text-xs md:text-sm text-white/60 mt-0.5 md:mt-1">
-          {description}
-        </p>
+        <p className="text-xs md:text-sm text-white/60 mt-1">{description}</p>
       </div>
     </div>
   </button>
@@ -279,13 +284,11 @@ const FirearmDetectionDemo: React.FC = () => (
   <div className="relative w-full h-full">
     <div className="absolute inset-0 bg-[url('/placeholder.svg?height=300&width=600')] md:bg-[url('/placeholder.svg?height=600&width=1200')] bg-cover"></div>
     <div className="absolute inset-0">
-      {/* Smaller bounding box for mobile */}
       <div className="absolute top-[30%] left-[35%] w-12 h-32 md:top-[30%] md:left-[40%] md:w-20 md:h-48 border-2 border-red-500 rounded-sm animate-pulse">
         <div className="absolute -top-6 left-0 bg-red-500 text-white text-[10px] md:text-xs px-1.5 py-0.5 md:px-2 md:py-1 rounded flex items-center">
-          <Gun size={10} className="mr-1 md:size-12" /> FIREARM
+          <ShieldAlert size={12} className="mr-1 md:mr-1.5" /> FIREARM
         </div>
       </div>
-      {/* Smaller alert box, positioned for mobile */}
       <div className="absolute top-2 right-2 md:top-4 md:right-4 bg-black/80 border border-red-500 p-2 md:p-4 rounded-md md:rounded-lg max-w-[180px] md:max-w-xs animate-pulse">
         <div className="flex items-center text-red-500 mb-1 md:mb-2">
           <AlertTriangle size={12} className="mr-1 md:size-16 md:mr-2" />
@@ -297,7 +300,6 @@ const FirearmDetectionDemo: React.FC = () => (
           Firearm detected. Security dispatched. Lockdown initiated.
         </p>
       </div>
-      {/* Smaller confidence score box */}
       <div className="absolute bottom-2 left-2 md:bottom-4 md:left-4 bg-black/80 p-1.5 md:p-3 rounded-md md:rounded-lg">
         <div className="text-[9px] md:text-xs text-white/90">
           <div className="flex justify-between mb-0.5 md:mb-1">
@@ -317,18 +319,16 @@ const FireHazardDemo: React.FC = () => (
   <div className="relative w-full h-full">
     <div className="absolute inset-0 bg-[url('/placeholder.svg?height=300&width=600')] md:bg-[url('/placeholder.svg?height=600&width=1200')] bg-cover"></div>
     <div className="absolute inset-0">
-      {/* Scaled detection boxes */}
       <div className="absolute top-[25%] left-[20%] w-20 h-20 md:top-[20%] md:left-[30%] md:w-32 md:h-32 border-2 border-orange-500 rounded-sm animate-pulse">
         <div className="absolute -top-6 left-0 bg-orange-500 text-white text-[10px] md:text-xs px-1.5 py-0.5 md:px-2 md:py-1 rounded flex items-center">
-          <Flame size={10} className="mr-1 md:size-12" /> FIRE
+          <Flame size={12} className="mr-1 md:mr-1.5" /> FIRE
         </div>
       </div>
       <div className="absolute top-[20%] left-[15%] w-32 h-16 md:top-[15%] md:left-[25%] md:w-48 md:h-24 border-2 border-orange-300 rounded-sm animate-pulse opacity-70">
         <div className="absolute -top-6 left-0 bg-orange-300 text-white text-[10px] md:text-xs px-1.5 py-0.5 md:px-2 md:py-1 rounded flex items-center">
-          <Flame size={10} className="mr-1 md:size-12" /> SMOKE
+          <Flame size={12} className="mr-1 md:mr-1.5" /> SMOKE
         </div>
       </div>
-      {/* Scaled alert box */}
       <div className="absolute top-2 right-2 md:top-4 md:right-4 bg-black/80 border border-orange-500 p-2 md:p-4 rounded-md md:rounded-lg max-w-[180px] md:max-w-xs animate-pulse">
         <div className="flex items-center text-orange-500 mb-1 md:mb-2">
           <AlertTriangle size={12} className="mr-1 md:size-16 md:mr-2" />
@@ -338,7 +338,6 @@ const FireHazardDemo: React.FC = () => (
           Fire detected. Suppression activated. Services notified.
         </p>
       </div>
-      {/* Scaled info box */}
       <div className="absolute bottom-2 left-2 md:bottom-4 md:left-4 bg-black/80 p-1.5 md:p-3 rounded-md md:rounded-lg">
         <div className="text-[9px] md:text-xs text-white/90 space-y-1 md:space-y-2">
           <div>
@@ -375,13 +374,11 @@ const SuspiciousBehaviorDemo: React.FC = () => (
   <div className="relative w-full h-full">
     <div className="absolute inset-0 bg-[url('/placeholder.svg?height=300&width=600')] md:bg-[url('/placeholder.svg?height=600&width=1200')] bg-cover"></div>
     <div className="absolute inset-0">
-      {/* Scaled detection box */}
       <div className="absolute top-[30%] left-[35%] w-12 h-32 md:top-[30%] md:left-[40%] md:w-16 md:h-40 border-2 border-amber-500 rounded-sm animate-pulse">
         <div className="absolute -top-6 left-0 bg-amber-500 text-white text-[10px] md:text-xs px-1.5 py-0.5 md:px-2 md:py-1 rounded flex items-center">
-          <AlertTriangle size={10} className="mr-1 md:size-12" /> SUSPICIOUS
+          <ScanSearch size={12} className="mr-1 md:mr-1.5" /> SUSPICIOUS
         </div>
       </div>
-      {/* SVG path might need viewBox adjustment or scaling if it looks off */}
       <svg
         className="absolute inset-0 w-full h-full"
         viewBox="0 0 800 450"
@@ -396,7 +393,6 @@ const SuspiciousBehaviorDemo: React.FC = () => (
           fill="none"
         />
       </svg>
-      {/* Scaled alert box */}
       <div className="absolute top-2 right-2 md:top-4 md:right-4 bg-black/80 border border-amber-500 p-2 md:p-4 rounded-md md:rounded-lg max-w-[180px] md:max-w-xs">
         <div className="flex items-center text-amber-500 mb-1 md:mb-2">
           <AlertTriangle size={12} className="mr-1 md:size-16 md:mr-2" />
@@ -408,7 +404,6 @@ const SuspiciousBehaviorDemo: React.FC = () => (
           Unusual loitering detected. Subject in zone 5:32m. Security notified.
         </p>
       </div>
-      {/* Scaled info box */}
       <div className="absolute bottom-2 left-2 md:bottom-4 md:left-4 bg-black/80 p-1.5 md:p-3 rounded-md md:rounded-lg">
         <div className="text-[9px] md:text-xs text-white/90 space-y-1 md:space-y-2">
           <div>

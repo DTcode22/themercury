@@ -1,3 +1,4 @@
+// FILE: src/app/components/Hero.tsx
 'use client';
 import Link from 'next/link';
 import {
@@ -7,49 +8,36 @@ import {
   Activity,
   Brain,
   LucideProps,
-} from 'lucide-react'; // Added LucideProps for icon type
-import { useState, useEffect, useRef, ReactElement } from 'react'; // Added ReactElement
+} from 'lucide-react';
+import { useState, useEffect, useRef, ReactElement } from 'react';
 
-// Define a type for the animation phases
 type AnimationPhase = 'typing' | 'pausing' | 'erasing';
 
-// Define the icon components and a type for their keys
-// Explicitly type the iconComponents object
 const iconComponents: Record<string, ReactElement<LucideProps>> = {
   Shield: <Shield className="inline-block text-emerald-400" size={22} />,
   Eye: <Eye className="inline-block text-emerald-400" size={22} />,
   Activity: <Activity className="inline-block text-emerald-400" size={22} />,
   Brain: <Brain className="inline-block text-emerald-400" size={22} />,
 };
-type IconKey = keyof typeof iconComponents; // This will correctly infer 'Shield' | 'Eye' | 'Activity' | 'Brain'
+type IconKey = keyof typeof iconComponents;
 
 const Hero = () => {
   const headingPhrases = [
-    'The future of security and efficiency, realized today',
-    'AI that learns how humans move, before threats unfold',
-    'Neural networks that see what human eyes miss',
-    'Predictive algorithms that prevent incidents before they occur',
-    'Computer vision that transforms surveillance into intelligence',
-    'Behavioral patterns analyzed in microseconds, not minutes',
-    'From passive monitoring to active threat prevention',
-    'Spatial awareness that transcends traditional security',
-    'The convergence of human intuition and machine precision',
+    'Transform Your Operations with AI-Powered Video Intelligence.',
+    'Unlock Unprecedented Security & Efficiency for Your Business.',
+    'Partner with Us for Proactive Threat Detection and Optimized Workflows.',
+    'Secure Your Future: Advanced AI Analytics Tailored to Your Needs.',
+    'Elevate Your Security Posture and Operational Insight with TheMercury.ai.',
+    'Gain Actionable Intelligence from Your Video Data, Effortlessly.',
   ];
 
   const subheadingPhrases = [
-    'Intelligence Architected',
-    'Anticipate • Adapt • Act',
-    'Perceive | Process | Protect',
-    'Beyond Surveillance: Meta-Awareness',
-    'Synthetic Intuition, Real Protection',
-    'Human Behavior, Machine Understood',
-    'Security Through Cognitive Computing',
-    'Algorithmic Vigilance, Perpetual Peace',
-    'Vision Beyond Visibility',
-    'Predictive Defense Framework',
-    'Pattern Recognition Redefined',
-    'Security Engineered, Threat Neutralized',
-    'The Cognitive Security Layer',
+    'Intelligent Solutions, Tangible Results.',
+    'Your Vision, Our AI Expertise.',
+    'Secure • Optimize • Innovate.',
+    'Data-Driven Insights for a Safer, Smarter Future.',
+    'The Future of Video Analytics, Delivered Today.',
+    'Empowering Businesses with Predictive Intelligence.',
   ];
 
   const [displayedHeading, setDisplayedHeading] = useState('');
@@ -59,17 +47,19 @@ const Hero = () => {
   const [headingPhase, setHeadingPhase] = useState<AnimationPhase>('typing');
   const [subheadingPhase, setSubheadingPhase] =
     useState<AnimationPhase>('typing');
-  const [currentIcon, setCurrentIcon] = useState<IconKey>('Shield'); // Use IconKey type
+  const [currentIcon, setCurrentIcon] = useState<IconKey>('Shield');
 
   const typingSpeedBase = useRef(30);
   const typingSpeedVariance = useRef(15);
   const erasingSpeedBase = useRef(15);
-  const pauseDuration = useRef(2800);
+  const subheadingPauseDurationMultiplier = 0.7; // Reduced from 1.2
+  const subheadingTypingSpeedMultiplier = 1.0; // Reduced from 1.2
+  const subheadingErasingSpeedMultiplier = 1.0; // Reduced from 1.1
+  const basePauseDuration = useRef(2800);
 
   const [gridOpacity, setGridOpacity] = useState(0.5);
   const [gridScale, setGridScale] = useState(5);
 
-  // Refs for timeouts related to grid animations to ensure they can be cleared on unmount
   const gridScaleTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const gridOpacityTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -98,7 +88,7 @@ const Hero = () => {
       case 'pausing':
         animationTimeout = setTimeout(() => {
           setHeadingPhase('erasing');
-        }, pauseDuration.current);
+        }, basePauseDuration.current);
         break;
       case 'erasing':
         if (displayedHeading.length > 0) {
@@ -137,7 +127,7 @@ const Hero = () => {
             setDisplayedSubheading(
               currentPhrase.substring(0, displayedSubheading.length + 1)
             );
-          }, getRandomTypingSpeed() * 1.2);
+          }, getRandomTypingSpeed() * subheadingTypingSpeedMultiplier);
         } else {
           setSubheadingPhase('pausing');
         }
@@ -145,7 +135,7 @@ const Hero = () => {
       case 'pausing':
         animationTimeout = setTimeout(() => {
           setSubheadingPhase('erasing');
-        }, pauseDuration.current * 1.2);
+        }, basePauseDuration.current * subheadingPauseDurationMultiplier);
         break;
       case 'erasing':
         if (displayedSubheading.length > 0) {
@@ -153,7 +143,7 @@ const Hero = () => {
             setDisplayedSubheading(
               displayedSubheading.substring(0, displayedSubheading.length - 1)
             );
-          }, erasingSpeedBase.current * 1.1);
+          }, erasingSpeedBase.current * subheadingErasingSpeedMultiplier);
         } else {
           setSubheadingIndex(
             (prevIndex) => (prevIndex + 1) % subheadingPhrases.length
@@ -184,7 +174,6 @@ const Hero = () => {
     subheadingPhrases,
   ]);
 
-  // Clean up grid animation timeouts when component unmounts
   useEffect(() => {
     return () => {
       if (gridScaleTimeoutRef.current) {
@@ -194,7 +183,7 @@ const Hero = () => {
         clearTimeout(gridOpacityTimeoutRef.current);
       }
     };
-  }, []); // Empty dependency array means this runs on mount and cleans up on unmount
+  }, []);
 
   return (
     <section className="relative min-h-screen w-full flex items-center overflow-hidden pt-20">
@@ -202,7 +191,7 @@ const Hero = () => {
         className="absolute inset-0 w-full h-full transition-all duration-700 ease-in-out"
         style={{
           backgroundImage: 'url("/grid-pattern.svg")',
-          backgroundSize: 640, // csstype allows number for px values
+          backgroundSize: 640,
           backgroundAttachment: 'fixed',
           backgroundRepeat: 'repeat',
           opacity: gridOpacity,
@@ -237,11 +226,11 @@ const Hero = () => {
             key={i}
             className="absolute rounded-full bg-emerald-400/30 animate-pulse"
             style={{
-              width: `${Math.random() * 6 + 2}px`, // Ensure string for CSS dimension
-              height: `${Math.random() * 6 + 2}px`, // Ensure string for CSS dimension
-              top: `${Math.random() * 100}%`, // Ensure string for CSS dimension
-              left: `${Math.random() * 100}%`, // Ensure string for CSS dimension
-              animationDuration: `${Math.random() * 8 + 2}s`, // Ensure string for CSS dimension
+              width: `${Math.random() * 6 + 2}px`,
+              height: `${Math.random() * 6 + 2}px`,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animationDuration: `${Math.random() * 8 + 2}s`,
               opacity: Math.random() * 0.5,
             }}
           ></div>
@@ -253,12 +242,10 @@ const Hero = () => {
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter mb-6 leading-tight min-h-[4rem] md:min-h-[5rem] lg:min-h-[6rem] flex items-center justify-center">
             <span className="inline-block">
               {displayedHeading}
-              {/* Conditionally render cursor only if typing or pausing for heading */}
               {(headingPhase === 'typing' || headingPhase === 'pausing') &&
                 displayedHeading.length > 0 && (
                   <span className="inline-block w-1 h-12 bg-emerald-400 ml-1 animate-pulse"></span>
                 )}
-              {/* Blinking cursor when heading is empty and about to type */}
               {headingPhase === 'typing' && displayedHeading.length === 0 && (
                 <span className="inline-block w-1 h-12 bg-emerald-400 ml-1 animate-pulse"></span>
               )}
@@ -269,13 +256,11 @@ const Hero = () => {
             <span className="flex items-center">
               {iconComponents[currentIcon]}
               <span className="mx-2">{displayedSubheading}</span>
-              {/* Conditionally render cursor only if typing or pausing for subheading */}
               {(subheadingPhase === 'typing' ||
                 subheadingPhase === 'pausing') &&
                 displayedSubheading.length > 0 && (
                   <span className="inline-block w-0.5 h-6 bg-emerald-400 animate-pulse"></span>
                 )}
-              {/* Blinking cursor when subheading is empty and about to type */}
               {subheadingPhase === 'typing' &&
                 displayedSubheading.length === 0 && (
                   <span className="inline-block w-0.5 h-6 bg-emerald-400 animate-pulse"></span>
