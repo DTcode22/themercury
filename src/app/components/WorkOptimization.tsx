@@ -245,42 +245,42 @@ const WorkOptimization: React.FC<PageSectionProps> = ({
           {/* For now, using lg:grid-cols-3 means they will take 1/3 of the container width on large screens */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <BenefitCard
-              icon={<TrendingUp size={20} />}
+              icon={<TrendingUp className="w-10 h-10 text-blue-400" />}
               title="Increase Productivity by 35%"
               description="Identify and eliminate bottlenecks in your workflows to significantly boost overall productivity."
               delay={0.3}
               isInView={isInView}
             />
             <BenefitCard
-              icon={<Clock size={20} />}
+              icon={<Clock className="w-10 h-10 text-blue-400" />}
               title="Reduce Wasted Time by 42%"
               description="Optimize employee schedules and task allocation based on AI-driven insights."
               delay={0.4}
               isInView={isInView}
             />
             <BenefitCard
-              icon={<Users size={20} />}
+              icon={<Users className="w-10 h-10 text-blue-400" />}
               title="Improve Employee Satisfaction"
               description="Create more balanced workloads and identify opportunities for skill development."
               delay={0.5}
               isInView={isInView}
             />
             <BenefitCard
-              icon={<BarChart3 size={20} />}
+              icon={<BarChart3 className="w-10 h-10 text-blue-400" />}
               title="Data-Driven Decision Making"
               description="Make strategic decisions based on comprehensive workforce analytics and trends."
               delay={0.6}
               isInView={isInView}
             />
             <BenefitCard
-              icon={<Briefcase size={20} />}
+              icon={<Briefcase className="w-10 h-10 text-blue-400" />}
               title="Streamline Core Operations"
               description="Automate repetitive tasks and refine processes for smoother daily operations."
               delay={0.7}
               isInView={isInView}
             />
             <BenefitCard
-              icon={<Target size={20} />}
+              icon={<Target className="w-10 h-10 text-blue-400" />}
               title="Enhanced Goal Alignment"
               description="Ensure workforce activities directly contribute to key organizational objectives and KPIs."
               delay={0.8}
@@ -1217,7 +1217,7 @@ const OptimizationItem: React.FC<OptimizationItemProps> = ({
   );
 };
 
-// BenefitCard is reverted to its true original styling for the blue section
+// BenefitCard is updated to match red/purple card styles
 const BenefitCard: React.FC<BenefitCardProps> = ({
   icon,
   title,
@@ -1226,16 +1226,16 @@ const BenefitCard: React.FC<BenefitCardProps> = ({
   isInView,
 }) => (
   <motion.div
-    className="bg-gradient-to-br from-blue-950/30 to-black/50 backdrop-blur-sm p-6 rounded-xl border border-blue-900/30 hover:border-blue-700/30 transition-all"
+    className="bg-gradient-to-br from-blue-950/30 to-black/50 backdrop-blur-sm p-6 rounded-2xl border border-blue-900/30 hover:border-blue-700/30 transition-all group"
     initial={{ opacity: 0, y: 20 }}
     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
     transition={{ duration: 0.5, delay }}
   >
-    <div className="p-2 bg-blue-500/20 rounded-lg inline-block mb-4">
+    <div className="mb-5 p-3 bg-blue-900/20 inline-block rounded-xl group-hover:bg-blue-900/30 transition-colors">
       {icon}
     </div>
-    <h3 className="text-lg font-bold mb-2">{title}</h3>
-    <p className="text-white/70 text-sm">{description}</p>
+    <h3 className="text-xl font-bold mb-3">{title}</h3>
+    <p className="text-white/70">{description}</p>
   </motion.div>
 );
 
