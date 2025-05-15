@@ -1,20 +1,14 @@
-// src/app/contact/page.tsx
-'use client'; // Add 'use client' if you plan to add interactive elements like a form
-
-import type { Metadata } from 'next';
+'use client';
 import { Mail, Phone, MapPin } from 'lucide-react';
 
-// If you don't need client-side interactivity yet, you can remove 'use client'
-// and the metadata can be exported directly.
-// export const metadata: Metadata = {
-//   title: 'Contact Us | theMERCURY.ai',
-//   description: 'Get in touch with theMERCURY.ai team.',
-// };
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Contact Us | theMERCURY.ai',
+  description: 'Get in touch with theMERCURY.ai team.',
+};
 
 export default function ContactPage() {
-  // If 'use client' is used, metadata needs to be handled differently (e.g. in generateMetadata or layout)
-  // For simplicity in a placeholder, we'll skip dynamic metadata here if 'use client' is present.
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 pt-24 pb-12">
       <div className="max-w-4xl w-full text-center">
@@ -22,7 +16,7 @@ export default function ContactPage() {
           Contact Us
         </h1>
         <p className="text-xl text-white/70 mb-12">
-          We'd love to hear from you! Whether you have a question about
+          We&apos;d love to hear from you! Whether you have a question about
           features, trials, pricing, or anything else, our team is ready to
           answer all your questions.
         </p>
@@ -92,7 +86,8 @@ export default function ContactPage() {
               Send Us a Message
             </h2>
             <p className="text-white/70 mb-6">
-              Alternatively, fill out the form below and we'll get back to you.
+              Alternatively, fill out the form below and we&apos;ll get back to
+              you.
             </p>
           </div>
           <div className="bg-gray-800/30 p-6 rounded-lg border border-gray-700/50">

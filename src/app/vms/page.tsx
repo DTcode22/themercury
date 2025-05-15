@@ -19,7 +19,8 @@ export default function VMSPage() {
         </h2>
         <p className="text-lg text-white/70">
           Our advanced Video Management System page is currently being
-          developed. We're working hard to bring you a cutting-edge solution.
+          developed. We&apos;re working hard to bring you a cutting-edge
+          solution.
         </p>
         <p className="text-lg text-white/70 mt-4">
           Please check back soon for updates!
