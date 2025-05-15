@@ -1,4 +1,3 @@
-// FILE: src/app/components/WorkOptimization.tsx
 'use client';
 
 import type React from 'react';
@@ -17,7 +16,6 @@ import {
 import { ComponentProps as PageSectionProps } from '@/app/page';
 import { THEME_COLORS_MAP } from '@/app/utils/themeColors';
 
-// Original Interface Definitions
 interface TabButtonProps {
   active: boolean;
   onClick: () => void;
@@ -76,7 +74,7 @@ const WorkOptimization: React.FC<PageSectionProps> = ({
   currentSectionThemeName,
 }) => {
   const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 }); // Lower amount for mobile responsiveness
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
   const [activeTab, setActiveTab] = useState<string>('productivity');
 
   const themeDetails = THEME_COLORS_MAP[currentSectionThemeName];
@@ -88,7 +86,6 @@ const WorkOptimization: React.FC<PageSectionProps> = ({
       ref={ref}
       className={`py-16 md:py-20 relative overflow-hidden bg-gradient-to-b ${themeDetails.sectionBgGradient}`}
     >
-      {/* Gradient pattern at the top */}
       <div className="absolute top-0 left-0 right-0 h-40 md:h-60 overflow-hidden pointer-events-none">
         <div
           className="absolute inset-0"
@@ -100,7 +97,6 @@ const WorkOptimization: React.FC<PageSectionProps> = ({
         ></div>
       </div>
 
-      {/* Animated background elements (SVG pattern) */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div
           className="absolute inset-0"
@@ -111,7 +107,6 @@ const WorkOptimization: React.FC<PageSectionProps> = ({
         ></div>
       </div>
 
-      {/* Neural network animation */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -352,7 +347,6 @@ const ProductivityTab: React.FC<TabContentProps> = () => {
             </div>
             <div className="h-56 sm:h-64 w-full">
               {' '}
-              {/* Adjusted height for mobile */}
               <div className="relative h-full w-full">
                 <div className="absolute inset-0 flex flex-col justify-between">
                   {[0, 1, 2, 3, 4].map((_, i) => (
@@ -365,7 +359,7 @@ const ProductivityTab: React.FC<TabContentProps> = () => {
                 <div className="absolute bottom-0 left-0 right-0 h-full flex items-end">
                   <svg
                     className="w-full h-full"
-                    viewBox="0 0 700 300" // Keep viewBox consistent for scaling
+                    viewBox="0 0 700 300"
                     preserveAspectRatio="none"
                   >
                     <polyline
@@ -389,7 +383,7 @@ const ProductivityTab: React.FC<TabContentProps> = () => {
                     preserveAspectRatio="none"
                   >
                     <linearGradient
-                      id="blueGradientWorkOpt" // Unique ID
+                      id="blueGradientWorkOpt"
                       x1="0%"
                       y1="0%"
                       x2="0%"
@@ -569,9 +563,7 @@ const WorkflowTab: React.FC<TabContentProps> = () => {
               <div className="absolute inset-0 bg-[url('/placeholder.svg?height=400&width=400')] bg-cover opacity-70"></div>
               <div className="absolute inset-0 p-2 sm:p-4">
                 {' '}
-                {/* Reduced padding for smaller SVG elements */}
                 <svg width="100%" height="100%" viewBox="0 0 500 500">
-                  {/* Nodes scaled down for mobile */}
                   <circle
                     cx="250"
                     cy="100"
@@ -719,7 +711,7 @@ const WorkflowTab: React.FC<TabContentProps> = () => {
                     strokeWidth="1.5"
                     strokeDasharray="4,4"
                   />
-                  {/* Bottleneck indicators scaled down */}
+
                   <circle
                     cx="100"
                     cy="300"
@@ -762,9 +754,9 @@ const WorkflowTab: React.FC<TabContentProps> = () => {
             </h4>
             <div className="space-y-3 md:space-y-4">
               {[
-                { label: 'Productivity', value: 32 }, // Shorter label
+                { label: 'Productivity', value: 32 },
                 { label: 'Cost Reduction', value: 28 },
-                { label: 'Response Time', value: 45 }, // Shorter label
+                { label: 'Response Time', value: 45 },
               ].map((item) => (
                 <div key={item.label}>
                   <div className="flex justify-between items-center mb-1">
@@ -801,11 +793,9 @@ const TimeManagementTab: React.FC<TabContentProps> = () => {
             <h4 className="text-base md:text-lg font-semibold mb-4">
               Time Allocation by Activity
             </h4>
-            {/* Refined chart and legend layout */}
+
             <div className="flex flex-col md:relative md:h-[300px] items-center">
               {' '}
-              {/* md:h-[300px] or md:aspect-video depending on desired md+ height */}
-              {/* Chart container */}
               <div className="w-[180px] h-[180px] sm:w-[200px] sm:h-[200px] md:w-[250px] md:h-[250px] lg:w-[300px] lg:h-[300px] md:absolute md:left-0 md:top-1/2 md:transform md:-translate-y-1/2">
                 <svg width="100%" height="100%" viewBox="0 0 100 100">
                   <circle
@@ -863,7 +853,6 @@ const TimeManagementTab: React.FC<TabContentProps> = () => {
                   </text>
                 </svg>
               </div>
-              {/* Legend positioning: below chart on mobile, to the side on md+ */}
               <div className="flex flex-wrap justify-center md:justify-start gap-x-3 sm:gap-x-4 gap-y-1.5 sm:gap-y-2 mt-4 md:absolute md:right-0 md:top-1/2 md:transform md:-translate-y-1/2 md:space-y-2 lg:space-y-3 xl:space-y-4 md:flex-col md:gap-0 md:mt-0">
                 {[
                   {

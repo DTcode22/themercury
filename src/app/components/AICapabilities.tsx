@@ -1,4 +1,3 @@
-// FILE: src/app/components/AICapabilities.tsx
 'use client';
 
 import type React from 'react';
@@ -8,7 +7,6 @@ import { Brain, Cpu, Network, Lock, Zap, BarChart3 } from 'lucide-react';
 import { ComponentProps as PageSectionProps } from '@/app/page';
 import { THEME_COLORS_MAP } from '@/app/utils/themeColors';
 
-// Original Interface Definitions
 interface CapabilityCardProps {
   icon: React.ReactNode;
   title: string;
@@ -27,7 +25,7 @@ const AICapabilities: React.FC<PageSectionProps> = ({
   currentSectionThemeName,
 }) => {
   const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 }); // Adjusted for mobile
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   const themeDetails = THEME_COLORS_MAP[currentSectionThemeName];
   const neuralNetPatternId = `neural-net-${currentSectionThemeName}-aicap`;
@@ -38,7 +36,6 @@ const AICapabilities: React.FC<PageSectionProps> = ({
       ref={ref}
       className={`py-16 md:py-30 relative overflow-hidden bg-gradient-to-b ${themeDetails.sectionBgGradient}`}
     >
-      {/* Gradient pattern at the top */}
       <div className="absolute top-0 left-0 right-0 h-40 md:h-60 overflow-hidden pointer-events-none">
         <div
           className="absolute inset-0"
@@ -50,7 +47,6 @@ const AICapabilities: React.FC<PageSectionProps> = ({
         ></div>
       </div>
 
-      {/* Animated background elements (SVG pattern) */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div
           className="absolute inset-0"
@@ -61,7 +57,6 @@ const AICapabilities: React.FC<PageSectionProps> = ({
         ></div>
       </div>
 
-      {/* Neural network animation (Full section) */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -239,7 +234,6 @@ const AICapabilities: React.FC<PageSectionProps> = ({
             </div>
             <div className="relative min-h-[300px] md:min-h-[400px] lg:min-h-0">
               {' '}
-              {/* Ensure min height for visual */}
               <div className="absolute inset-0 bg-[url('/placeholder.svg?height=400&width=400')] md:bg-[url('/placeholder.svg?height=600&width=600')] bg-cover"></div>
               <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                 <div className="relative w-full h-full max-w-xs md:max-w-md mx-auto">
@@ -354,10 +348,9 @@ const AICapabilities: React.FC<PageSectionProps> = ({
                     Output Layer{' '}
                   </div>
 
-                  {/* Adjusted "Processing" text positioning and size for mobile */}
                   <div className="absolute bottom-4 md:bottom-6 left-1/2 transform -translate-x-1/2 bg-black/80 px-2 py-1 md:px-4 md:py-2 rounded-md md:rounded-lg text-purple-400 text-[10px] md:text-sm flex items-center whitespace-nowrap">
                     <Cpu size={12} className="mr-1 md:size-16 md:mr-2" />
-                    <span>Processing: 24.3M params</span> {/* Shorter text */}
+                    <span>Processing: 24.3M params</span>
                   </div>
                 </div>
               </div>
@@ -366,7 +359,6 @@ const AICapabilities: React.FC<PageSectionProps> = ({
         </motion.div>
       </div>
 
-      {/* Gradient pattern at the bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-40 md:h-60 overflow-hidden pointer-events-none">
         <div
           className="absolute inset-0"

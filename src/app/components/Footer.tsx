@@ -90,8 +90,7 @@ const Footer = () => {
 
         <div className="border-t border-emerald-900/30 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-white/50 text-sm mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} theMERCURY.ai. All rights
-            reserved.
+            © {new Date().getFullYear()} theMERCURY.ai. All rights reserved.
           </p>
           <div className="flex space-x-6">
             <Link

@@ -1,11 +1,9 @@
-// src/app/components/SectionBoundaryEffect.tsx
 import React from 'react';
 
 interface SectionBoundaryEffectProps {
   position: 'top' | 'bottom';
   themeColorRGB: string;
   themeColorHex: string;
-  /** Defines the 'from-' color of the overlay gradient. E.g., 'black/90' or 'emerald-950/22' */
   overlaySourceColorCss: string;
 }
 
@@ -15,7 +13,7 @@ const SectionBoundaryEffect: React.FC<SectionBoundaryEffectProps> = ({
   themeColorHex,
   overlaySourceColorCss,
 }) => {
-  const heightClass = 'h-40'; // Standardized height
+  const heightClass = 'h-40';
   const radialGradient = `radial-gradient(rgba(${themeColorRGB}, 0.25) 1px, transparent 1px)`;
   const patternId = `neural-net-boundary-${position}-${themeColorHex.replace(
     '#',
@@ -31,16 +29,15 @@ const SectionBoundaryEffect: React.FC<SectionBoundaryEffectProps> = ({
     <div
       className={`absolute ${position}-0 left-0 right-0 ${heightClass} overflow-hidden ${overlayGradientClass} pointer-events-none z-0`}
     >
-      {/* Radial Pattern */}
       <div
         className="absolute inset-0"
         style={{
           backgroundImage: radialGradient,
           backgroundSize: '30px 30px',
-          opacity: 0.6, // Slightly more visible
+          opacity: 0.6,
         }}
       />
-      {/* Neural Network SVG Pattern */}
+
       <div className="absolute inset-0 opacity-40">
         {' '}
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">

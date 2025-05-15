@@ -1,4 +1,3 @@
-// FILE: src/app/components/CTA.tsx
 'use client';
 
 import { useRef } from 'react';
@@ -16,14 +15,11 @@ const CTA: React.FC<PageSectionProps> = ({ currentSectionThemeName }) => {
   const neuralNetPatternId = `neural-net-${currentSectionThemeName}-cta`;
   const animatedSvgPatternFill = themeDetails.hex.replace('#', '%23');
 
-  // Remove original top/bottom gradient patterns from CTA as they are replaced by the new h-60 ones.
-
   return (
     <section
       className={`py-80 relative bg-gradient-to-b ${themeDetails.sectionBgGradient}`}
       ref={ref}
     >
-      {/* Gradient pattern at the top */}
       <div className="absolute top-0 left-0 right-0 h-60 overflow-hidden pointer-events-none">
         <div
           className="absolute inset-0"
@@ -33,10 +29,8 @@ const CTA: React.FC<PageSectionProps> = ({ currentSectionThemeName }) => {
             opacity: 0.4,
           }}
         ></div>
-        {/* Neural network SVG Pattern - integrated into the main neural net below for CTA */}
       </div>
 
-      {/* Animated background elements (SVG pattern) */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div
           className="absolute inset-0"
@@ -47,7 +41,6 @@ const CTA: React.FC<PageSectionProps> = ({ currentSectionThemeName }) => {
         ></div>
       </div>
 
-      {/* Neural network animation (Full section) */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -149,7 +142,6 @@ const CTA: React.FC<PageSectionProps> = ({ currentSectionThemeName }) => {
         </div>
       </div>
 
-      {/* Gradient pattern at the bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-60 overflow-hidden pointer-events-none">
         <div
           className="absolute inset-0"
@@ -159,7 +151,6 @@ const CTA: React.FC<PageSectionProps> = ({ currentSectionThemeName }) => {
             opacity: 0.4,
           }}
         ></div>
-        {/* Neural network SVG Pattern - integrated into the main neural net for CTA */}
       </div>
     </section>
   );

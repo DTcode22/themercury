@@ -25,7 +25,6 @@ const AnalyticsDashboard = () => {
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const [activeTab, setActiveTab] = useState('realtime');
 
-  // Mock data for the charts
   const securityEvents = [65, 40, 78, 52, 63, 92, 58];
   const peopleTracked = [120, 230, 180, 290, 150, 310, 260];
   const threatLevels = [2, 1, 3, 1, 4, 2, 1];
@@ -35,7 +34,6 @@ const AnalyticsDashboard = () => {
       ref={ref}
       className="py-20 relative overflow-hidden bg-gradient-to-b from-black via-black to-emerald-950/20"
     >
-      {/* Animated grid background */}
       <div className="absolute inset-0 opacity-10">
         <div
           className="absolute inset-0"
@@ -63,7 +61,6 @@ const AnalyticsDashboard = () => {
           </p>
         </motion.div>
 
-        {/* Dashboard Tabs */}
         <div className="flex flex-wrap justify-center gap-4 mb-10">
           <TabButton
             active={activeTab === 'realtime'}
@@ -85,7 +82,6 @@ const AnalyticsDashboard = () => {
           />
         </div>
 
-        {/* Dashboard Content */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
@@ -168,9 +164,7 @@ const RealtimeTab = () => (
       <h4 className="text-lg font-semibold mb-4">Active Monitoring Zones</h4>
       <div className="relative aspect-video rounded-lg overflow-hidden border border-emerald-900/30">
         <div className="absolute inset-0 bg-[url('/placeholder.svg?height=600&width=1200')] bg-cover">
-          {/* Overlay with detection boxes */}
           <div className="absolute w-full h-full">
-            {/* Person detection boxes */}
             <div className="absolute top-[20%] left-[30%] w-16 h-40 border-2 border-emerald-400 rounded-sm animate-pulse">
               <div className="absolute -top-6 left-0 bg-emerald-500/90 text-white text-xs px-2 py-1 rounded">
                 Person #127
@@ -189,7 +183,6 @@ const RealtimeTab = () => (
               </div>
             </div>
 
-            {/* Zone overlays */}
             <div className="absolute top-[10%] left-[5%] w-[30%] h-[60%] border border-emerald-500/30 bg-emerald-500/10 rounded-md">
               <div className="absolute -top-6 left-0 bg-black/70 text-emerald-400 text-xs px-2 py-1 rounded">
                 Zone A - Entry
@@ -347,7 +340,6 @@ const TrackingTab: React.FC<TrackingTabProps> = ({ data, threatLevels }) => (
       <div className="relative aspect-video rounded-lg overflow-hidden border border-emerald-900/30">
         <div className="absolute inset-0 bg-[url('/placeholder.svg?height=600&width=1200')] bg-cover opacity-70"></div>
 
-        {/* Heatmap overlay */}
         <div className="absolute inset-0">
           <div className="absolute top-[20%] left-[30%] w-32 h-32 rounded-full bg-red-500/40 blur-xl"></div>
           <div className="absolute top-[40%] left-[60%] w-40 h-40 rounded-full bg-red-500/30 blur-xl"></div>

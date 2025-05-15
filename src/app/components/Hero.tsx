@@ -5,7 +5,6 @@ import { ArrowRight } from 'lucide-react';
 const Hero = () => {
   return (
     <section className="relative min-h-screen w-full flex items-center overflow-hidden pt-20">
-      {/* Animated Background with Grid Pattern */}
       <div
         className="absolute inset-0 w-full h-full transition-transform duration-200 ease-out"
         style={{
@@ -18,7 +17,6 @@ const Hero = () => {
         }}
       ></div>
 
-      {/* Green Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-950/40 to-black/60"></div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">

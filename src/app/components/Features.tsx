@@ -1,4 +1,3 @@
-// src/app/components/Features.tsx
 'use client';
 
 import type React from 'react';
@@ -37,7 +36,6 @@ const Features: React.FC<FeaturesProps> = ({
     >
       <div className="container mx-auto px-4 md:px-6 relative z-10 pt-20 pb-20">
         {' '}
-        {/* Added pt/pb for boundary overlap */}
         <div className="max-w-3xl mx-auto text-center mb-16">
           <motion.h2
             className={`text-3xl md:text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white ${themeDetails.accentColorClass}`}
@@ -126,7 +124,7 @@ const Features: React.FC<FeaturesProps> = ({
           </motion.div>
         </div>
       </div>
-      {/* Gradient pattern at the bottom */}
+
       <div className="absolute bottom-0 left-0 right-0 h-60 overflow-hidden pointer-events-none">
         <div
           className="absolute inset-0"
@@ -142,7 +140,7 @@ const Features: React.FC<FeaturesProps> = ({
           position="bottom"
           themeColorRGB={themeDetails.rgb}
           themeColorHex={themeDetails.hex}
-          overlaySourceColorCss={themeDetails.mainBgToColor.replace('to-', '')} // e.g. 'emerald-950/22'
+          overlaySourceColorCss={themeDetails.mainBgToColor.replace('to-', '')}
         />
       )}
     </section>

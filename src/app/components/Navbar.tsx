@@ -1,15 +1,15 @@
 'use client';
 
-import React, { useState, useEffect } from 'react'; // Explicit React import
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import AnimatedLogo from './AnimatedLogo';
-import { useSectionTheme } from '@/context/SectionThemeContext'; // Added import
+import { useSectionTheme } from '@/context/SectionThemeContext';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { activeTheme } = useSectionTheme(); // Consume theme
+  const { activeTheme } = useSectionTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,7 +37,7 @@ const Navbar = () => {
       case 'gray':
         return 'text-gray-400';
       default:
-        return 'text-emerald-400'; // Fallback
+        return 'text-emerald-400';
     }
   };
 
@@ -90,20 +90,15 @@ const Navbar = () => {
             <AnimatedLogo dotAiColor={getDotAiColor()} />
           </Link>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <NavLink href="/vms">VMS</NavLink>
             <NavLink href="/solutions">Solutions</NavLink>
             <NavLink href="/hardware">Hardware</NavLink>
-            <Link
-              href="/contact"
-              className={getButtonClasses()} // Apply dynamic classes
-            >
+            <Link href="/contact" className={getButtonClasses()}>
               Contact us
             </Link>
           </div>
 
-          {/* Mobile Navigation Toggle */}
           <button
             className="md:hidden text-white"
             onClick={() => setIsOpen(!isOpen)}
@@ -114,7 +109,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation Menu */}
       {isOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-md">
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
@@ -129,7 +123,7 @@ const Navbar = () => {
             </MobileNavLink>
             <Link
               href="/contact"
-              className={getMobileButtonClasses()} // Apply dynamic classes for mobile
+              className={getMobileButtonClasses()}
               onClick={() => setIsOpen(false)}
             >
               Contact us

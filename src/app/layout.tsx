@@ -5,7 +5,7 @@ import './globals.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { ThemeProvider } from '../components/ThemeProvider';
-import { SectionThemeProvider } from '@/context/SectionThemeContext'; // Added import
+import { SectionThemeProvider } from '@/context/SectionThemeContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,7 +25,6 @@ export default function RootLayout({
       <body className={`${inter.className} bg-black text-white antialiased`}>
         <SectionThemeProvider>
           {' '}
-          {/* Added SectionThemeProvider wrapper */}
           <ThemeProvider attribute="class" defaultTheme="dark">
             <div className="relative min-h-screen">
               <div className="grid-pattern absolute inset-0 bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] opacity-30"></div>

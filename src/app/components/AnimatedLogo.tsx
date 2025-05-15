@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 
 const AnimatedLogo = ({ dotAiColor }: { dotAiColor: string }) => {
-  // Changed prop to be required
   const [animationComplete, setAnimationComplete] = useState(false);
   const logoText = 'theMERCURY';
   const [visibleText, setVisibleText] = useState('');

@@ -1,4 +1,3 @@
-// FILE: src/app/components/ThreatDetection.tsx
 'use client';
 
 import type React from 'react';
@@ -47,7 +46,6 @@ const ThreatDetection: React.FC<PageSectionProps> = ({
       ref={ref}
       className={`py-16 md:py-20 relative overflow-hidden bg-gradient-to-b ${themeDetails.sectionBgGradient}`}
     >
-      {/* Gradient pattern at the top */}
       <div className="absolute top-0 left-0 right-0 h-40 md:h-60 overflow-hidden pointer-events-none">
         <div
           className="absolute inset-0"
@@ -59,7 +57,6 @@ const ThreatDetection: React.FC<PageSectionProps> = ({
         ></div>
       </div>
 
-      {/* Animated background elements (SVG pattern) */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div
           className="absolute inset-0"
@@ -70,7 +67,6 @@ const ThreatDetection: React.FC<PageSectionProps> = ({
         ></div>
       </div>
 
-      {/* Neural network animation */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -169,7 +165,7 @@ const ThreatDetection: React.FC<PageSectionProps> = ({
               {activeDemo === 'behavior' && <SuspiciousBehaviorDemo />}
             </div>
           </div>
-          {/* Changed space-y-4 to space-y-2 for a slighter gap */}
+
           <div className="order-1 lg:order-2 flex flex-col space-y-2 lg:h-full lg:justify-start lg:pl-4">
             <ThreatDemoButton
               active={activeDemo === 'firearm'}
